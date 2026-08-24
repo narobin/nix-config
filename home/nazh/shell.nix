@@ -12,6 +12,12 @@
     '';
   };
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    PAGER = "moor";
+  };
+
   programs.fish = {
     enable = true;
 
