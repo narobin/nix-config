@@ -7,13 +7,12 @@
 
     casks = [
       "orion"
-      "zen"
       "affinity"
     ];
 
     masApps = {
       "Reeder"  = 6475002485;
-      "Things"  = 904237743;
+      "Things"  = 904280696;
     };
 
     onActivation.cleanup = "zap";

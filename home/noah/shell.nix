@@ -13,8 +13,8 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
+    EDITOR = lib.mkForce "nvim";
+    VISUAL = lib.mkForce "nvim";
     PAGER = "moor";
   };
 
