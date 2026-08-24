@@ -1,7 +1,7 @@
 { mySystem, ... }:
 {
   programs.obsidian = {
-    enable = config.mySystem.enableGui;
+    enable = mySystem.enableGui;
     cli.enable = true;
   };
 }

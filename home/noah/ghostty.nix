@@ -1,7 +1,7 @@
 { mySystem, ... }:
 {
   programs.ghostty = {
-    enable = config.mySystem.enableGui;
+    enable = mySystem.enableGui;
 
     enableFishIntegration = true;
     enableZshIntegration = true;
