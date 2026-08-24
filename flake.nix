@@ -4,7 +4,7 @@
   inputs = {
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixos-26.05-darwin";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -19,7 +19,7 @@
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follow = "nixpkgs";
+      #inputs.nixpkgs.follow = "nixpkgs-nixos";
     };
   };
 
@@ -42,7 +42,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             determinate.darwinModules.default
-            home-manager.darwinModules.home-manager
+            home-manager-darwin.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -70,7 +70,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            home-manager.darwinModules.home-manager
+            home-manager-nixos.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -96,6 +96,7 @@
 
       darwinConfigurations = {
         "throne-console.cabine.me" = mkDarwinHost ./hosts/throne-console.cabine.me.nix;
+        "codifier.narobin.com" = mkDarwinHost ./hosts/codifier.narobin.com.nix;
       };
 
       # Define development environment for this project
