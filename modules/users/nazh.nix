@@ -24,6 +24,7 @@ in
       ./../../home/${username}/shell.nix
       ./../../home/${username}/obsidian.nix
       ./../../home/${username}/zed.nix
+      ./../../home/${username}/ghostty.nix
     ];
   };
 }

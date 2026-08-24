@@ -11,6 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follow = "nixpkgs";
+    };
   };
 
   outputs =
@@ -19,6 +23,7 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      sops-nix
     }@inputs:
     let
       mkDarwinHost =
@@ -40,6 +45,7 @@
                 })
               ];
             }
+            sops-nix.darwinModules.sops
             module
           ];
         };
@@ -62,6 +68,7 @@
                 })
               ];
             }
+            sops-nix.nixosModules.sops
             module
           ];
         };

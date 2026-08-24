@@ -5,8 +5,11 @@
     ../modules/darwin/brew.nix
     ../modules/shared/packages.nix
     ../modules/shared/nix.nix
+    ../modules/shared/settings.nix
     ../modules/users/nazh.nix
   ];
+
+  mySystem.enableGui = true;
 
   networking.hostName = "codifier.narobin.com";
   networking.localHostName = "codifier";

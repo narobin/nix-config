@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   programs.obsidian = {
-    enable = true;
+    enable = config.mySystem.enableGui;
     cli.enable = true;
   };
 }
