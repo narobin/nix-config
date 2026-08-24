@@ -4,15 +4,15 @@
 let
   username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-  homeDir = if isDarwin then "Users/${username}" else "/home/${username}";
+  homeDir = if isDarwin then /Users/${username} else "/home/${username}";
   sudoerGroup = if isDarwin then "admin" else "wheel";
 in
 {
   users.users.${username} = {
-    isNormalUser = true;
+    # isNormalUser = true;
     home = homeDir;
     shell = pkgs.zsh;
-    extraGroups = [ sudoerGroup ];
+    # extraGroups = [ sudoerGroup ];
   };
 
   home-manager.users.${username} = {

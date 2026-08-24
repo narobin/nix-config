@@ -5,9 +5,10 @@
     ../modules/darwin/system.nix
     ../modules/darwin/brew.nix
     ../modules/shared/packages.nix
-    ../modules/shared/nix.nix
     ../modules/users/noah.nix
   ];
+
+  system.primaryUser = "noah";
 
   mySystem.enableGui = true;
 
