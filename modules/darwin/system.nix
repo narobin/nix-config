@@ -20,6 +20,5 @@
       KeyRepeat = 1;
     };
 
-    WindowManager.GloballyEnabled = true;
   };
 }
