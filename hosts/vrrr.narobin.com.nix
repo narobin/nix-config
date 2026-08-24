@@ -10,7 +10,7 @@
     ../modules/shared/packages.nix
     ../modules/shared/nix.nix
     ../modules/shared/settings.nix
-    ../modules/users/nazh.nix
+    ../modules/users/noah.nix
   ];
 
   mySystem.enableGui = true;

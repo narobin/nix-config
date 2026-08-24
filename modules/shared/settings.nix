@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   options.mySystem.enableGui = lib.mkOption {
     type = lib.types.bool;

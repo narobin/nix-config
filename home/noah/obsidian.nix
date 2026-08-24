@@ -1,4 +1,4 @@
-{ config, ... }:
+{ mySystem, ... }:
 {
   programs.obsidian = {
     enable = config.mySystem.enableGui;

@@ -90,13 +90,13 @@
     in
     {
       nixosConfigurations = {
-        "servitor.narobin.com" = mkHost ./hosts/servitor.narobin.com.nix;
-        "vrrr.narobin.com" = mkHost ./hosts/vrrr.narobin.com.nix;
+        servitor = mkHost ./hosts/servitor.narobin.com.nix;
+        vrrr = mkHost ./hosts/vrrr.narobin.com.nix;
       };
 
       darwinConfigurations = {
-        "throne-console.cabine.me" = mkDarwinHost ./hosts/throne-console.cabine.me.nix;
-        "codifier.narobin.com" = mkDarwinHost ./hosts/codifier.narobin.com.nix;
+        throne-console = mkDarwinHost ./hosts/throne-console.cabine.me.nix;
+        codifier = mkDarwinHost ./hosts/codifier.narobin.com.nix;
       };
 
       # Define development environment for this project

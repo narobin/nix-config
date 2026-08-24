@@ -1,8 +1,8 @@
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  username = "nazh";
+  username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then "Users/${username}" else "/home/${username}";
   sudoerGroup = if isDarwin then "admin" else "wheel";
@@ -18,6 +18,8 @@ in
   home-manager.users.${username} = {
     home.username = username;
     home.homeDirectory = homeDir;
+
+    _module.args.mySystem = config.mySystem;
 
     imports = [
       ./../../home/${username}/git.nix
