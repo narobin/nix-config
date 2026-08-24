@@ -8,6 +8,7 @@
     casks = [
       "orion"
       "zen"
+      "affinity"
     ];
 
     masApps = {
