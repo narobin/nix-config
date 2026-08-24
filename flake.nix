@@ -2,6 +2,7 @@
   description = "nix config for Nazh and Cabine";
 
   inputs = {
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
     nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixos-26.05";
     nix-darwin = {
@@ -25,6 +26,7 @@
   outputs =
     {
       self,
+      determinate,
       nixpkgs-nixos,
       nixpkgs-darwin,
       nix-darwin,
@@ -39,6 +41,7 @@
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
           modules = [
+            determinate.darwinModules.default
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -53,6 +56,11 @@
               ];
             }
             sops-nix.darwinModules.sops
+
+            ({ ... }: {
+              determinateNix.enable = true;
+            })
+
             module
           ];
         };
