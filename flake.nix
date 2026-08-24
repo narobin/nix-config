@@ -2,14 +2,19 @@
   description = "nix config for Nazh and Cabine";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-nixos.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixos-26.05";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-    home-manager = {
+    home-manager-nixos = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-nixos";
+    };
+    home-manager-darwin = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -20,9 +25,11 @@
   outputs =
     {
       self,
-      nixpkgs,
+      nixpkgs-nixos,
+      nixpkgs-darwin,
       nix-darwin,
-      home-manager,
+      home-manager-nixos,
+      home-manager-darwin,
       sops-nix
     }@inputs:
     let
@@ -51,7 +58,7 @@
         };
       mkHost =
         module:
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-nixos.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
@@ -86,7 +93,7 @@
       # Define development environment for this project
       devShells."aarch64-darwin".default =
         let
-          pkgs = nixpkgs.legacyPackages."aarch64-darwin";
+          pkgs = nixpkgs-darwin.legacyPackages."aarch64-darwin";
         in
         pkgs.mkShell {
           packages = with pkgs; [
@@ -99,7 +106,7 @@
           ];
 
           shellHook = ''
-            export NIX_PATH="nixpkgs=${nixpkgs}"
+            export NIX_PATH="nixpkgs=${nixpkgs-darwin}"
           '';
         };
     };
