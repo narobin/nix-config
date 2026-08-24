@@ -2,6 +2,7 @@
 {
   imports = [
     ../modules/shared/settings.nix
+    ../modules/shared/nix.nix
     ../modules/darwin/system.nix
     ../modules/darwin/brew.nix
     ../modules/shared/packages.nix
