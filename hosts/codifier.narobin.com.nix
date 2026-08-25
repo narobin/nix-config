@@ -6,7 +6,7 @@
     ../modules/darwin/system.nix
     ../modules/darwin/brew.nix
     ../modules/shared/packages.nix
-    ../modules/users/noah.nix
+    ../home/noah/default.nix
   ];
 
   system.primaryUser = "noah";

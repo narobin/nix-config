@@ -9,8 +9,8 @@
     ../modules/shared/packages.nix
     ../modules/shared/nix.nix
     ../modules/shared/settings.nix
-    ../modules/users/noah.nix
-    ../modules/users/cabine.nix
+    ../home/noah/default.nix
+    ../home/cabine/default.nix
   ];
 
   mySystem.enableGui = false;

@@ -108,7 +108,7 @@
           packages = with pkgs; [
             nil
             nixd
-            nixfmt-rfc-style
+            nixfmt
             git
             sops
             age

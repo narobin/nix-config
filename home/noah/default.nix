@@ -1,11 +1,10 @@
-
 { pkgs, config, ... }:
 
 let
   username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then /Users/${username} else "/home/${username}";
-  sudoerGroup = if isDarwin then "admin" else "wheel";
+  # sudoerGroup = if isDarwin then "admin" else "wheel";
 in
 {
   users.users.${username} = {
@@ -22,13 +21,14 @@ in
     _module.args.mySystem = config.mySystem;
 
     imports = [
-      ./../../home/${username}/git.nix
-      ./../../home/${username}/shell.nix
-      ./../../home/${username}/obsidian.nix
-      ./../../home/${username}/zed.nix
-      ./../../home/${username}/ghostty.nix
-      ./../../home/${username}/ssh.nix
-      ./../../home/${username}/firefox.nix
+      ./git.nix
+      ./shell.nix
+      ./obsidian.nix
+      ./zed.nix
+      ./ghostty.nix
+      ./ssh.nix
+      ./firefox.nix
+      ./1password.nix
     ];
   };
 }

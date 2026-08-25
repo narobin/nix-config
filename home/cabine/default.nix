@@ -13,8 +13,8 @@ in
 
   home-manager.users.${username} = {
     imports = [
-      ./../../home/${username}/git.nix
-      ./../../home/${username}/shell.nix
+      ./git.nix
+      ./shell.nix
     ];
   };
 }

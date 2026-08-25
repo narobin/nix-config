@@ -5,8 +5,10 @@
     ../modules/darwin/brew.nix
     ../modules/shared/packages.nix
     ../modules/shared/nix.nix
-    ./modules/users/nazh.nix
+    ../home/cabine/default.nix
   ];
+
+  system.primaryUser = "cabine";
 
   networking.hostName = "throne-console.cabine.me";
   networking.localHostName = "throne-console";
