@@ -22,7 +22,7 @@
     enable = true;
 
     shellAbbrs = {
-      drs = "darwin-rebuild switch";
+      drs = "sudo darwin-rebuild switch --flake .#";
       zed = "zeditor";
     };
 
