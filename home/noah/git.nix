@@ -5,7 +5,7 @@
   ...
 }:
 {
-  home.file.".ssh/git-signing.pub".source = ./resources/git-sigining.pub;
+  home.file.".ssh/git-signing.pub".source = ./resources/git-signing.pub;
 
   programs.git = {
     enable = true;
