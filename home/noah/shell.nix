@@ -2,7 +2,7 @@
 {
   programs.zsh = {
     enable = true;
-    initExtra = ''
+    initContent = ''
       if [[ $- == *i* ]] \
         && [ -z "$ZSH_EXECUTION_STRING" ] \
         && [[ "$(< /proc/$PPID/comm)" != "fish" ]]
