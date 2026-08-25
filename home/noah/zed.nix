@@ -2,7 +2,6 @@
 {
   programs.zed-editor = {
     enable = true;
-    defaultEditor = true;
     extensions = [
       "html"
       "nix"
@@ -12,7 +11,7 @@
       diff_view_style = "split";
       cli_default_open_behavior = "new_window";
       ensure_final_newline_on_save = true;
-      format_on_save = "modifications";
+      format_on_save = "on";
       autosave = {
         after_delay.milliseconds = 1000;
       };
@@ -25,10 +24,8 @@
       telemetry = {
         diagnostics = false;
         metrics = false;
-        anthropic_retention = false;
       };
       ui_font_size = 16;
-      buffer_font-size = 16;
       theme = {
         mode = "system";
         light = "Gruvbox Light";

@@ -21,7 +21,10 @@
   programs.fish = {
     enable = true;
 
-    shellAbbrs = { };
+    shellAbbrs = {
+      drs = "darwin-rebuild switch";
+      zed = "zeditor";
+    };
 
     shellAliases = {
       vi  = "nvim";

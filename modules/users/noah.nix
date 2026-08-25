@@ -27,6 +27,8 @@ in
       ./../../home/${username}/obsidian.nix
       ./../../home/${username}/zed.nix
       ./../../home/${username}/ghostty.nix
+      ./../../home/${username}/ssh.nix
+      ./../../home/${username}/firefox.nix
     ];
   };
 }
