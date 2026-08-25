@@ -24,8 +24,8 @@ in
         IdentityAgent = onePasswordPath;
         IdentitiesOnly = "yes";
 
-        ServerKeepAliveInterval = 60;
-        ServiceAliveCountMax = 3;
+        ServerAliveInterval = 60;
+        ServerAliveCountMax = 3;
         TCPKeepAlive = "yes";
 
         HashKnownHosts = "yes";

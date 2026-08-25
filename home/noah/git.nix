@@ -4,6 +4,13 @@
   lib,
   ...
 }:
+let
+  sshSignPath =
+    if pkgs.stdenv.isDarwin then
+      "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    else
+      "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+in
 {
   home.file.".ssh/git-signing.pub".source = ./resources/git-signing.pub;
 
@@ -20,7 +27,7 @@
       gpg = {
         format = "ssh";
         ssh = {
-          program = lib.getExe' pkgs._1password-gui "op-ssh-sign";
+          program = sshSignPath;
         };
       };
 
@@ -109,7 +116,9 @@
         fsckObjects = true;
       };
 
-      "url git@github.com".insteadOf = "https://github.com";
+      url = {
+        "git@github.com:".insteadOf = "https://github.com";
+      };
     };
   };
 }
