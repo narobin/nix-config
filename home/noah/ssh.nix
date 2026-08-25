@@ -14,7 +14,13 @@ in
     enableDefaultConfig = false;
 
     settings = {
-      "*" = lib.hm.dag.entriesBefore [ "github.com" ] {
+      "github.com" = lib.hm.dag.entryBefore [ "*" ] {
+        User = "git";
+        IdentityFile = "~/.ssh/github.pub";
+        IdentitiesOnly = "yes";
+      };
+
+      "*" = {
         IdentityAgent = onePasswordPath;
         IdentitiesOnly = "yes";
 
@@ -29,12 +35,6 @@ in
         KexAlgorithms = "curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512";
         MACs = "hmac-sha2-512,hmac-sha2-256";
         Ciphers = "chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes256-ctr";
-      };
-
-      "github.com" = {
-        User = "git";
-        IdentityFile = "~/.ssh/github.pub";
-        IdentitiesOnly = "yes";
       };
     };
   };
