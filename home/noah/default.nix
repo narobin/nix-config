@@ -28,6 +28,7 @@ in
       ./ghostty.nix
       ./ssh.nix
       ./firefox.nix
+      ./chromium.nix
       ./1password.nix
       ./neovim.nix
     ];
