@@ -23,7 +23,7 @@
 
     shellAbbrs = {
       drs = "sudo darwin-rebuild switch --flake .#";
-      zed = "zeditor";
+      zed = "zeditor .";
     };
 
     shellAliases = {

@@ -4,4 +4,5 @@
 
   # TODO: set up hyprland
   services.hyprland.enable = config.mySystem.enableGui;
+
 }
