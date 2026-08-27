@@ -29,6 +29,7 @@ in
       ./ssh.nix
       ./firefox.nix
       ./1password.nix
+      ./neovim.nix
     ];
   };
 }
