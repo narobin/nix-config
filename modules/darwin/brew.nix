@@ -8,6 +8,7 @@
     casks = [
       "orion"
       "affinity"
+      "ungoogled-chromium"
     ];
 
     masApps = {

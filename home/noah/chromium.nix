@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.chromium = {
-    enable = true;
+    enable = pkgs.stdenv.hostPlatform.isDarwin;
     package = pkgs.ungoogled-chromium;
     extensions = [
       # Obsidian Web Clipper (official, from Chrome Web Store)
