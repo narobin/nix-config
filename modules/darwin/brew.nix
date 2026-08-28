@@ -17,7 +17,11 @@
       "Mela"	= 1568924476;
     };
 
-    onActivation.cleanup = "zap";
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
 
     enableZshIntegration = true;
     enableFishIntegration = true;
