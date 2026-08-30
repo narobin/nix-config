@@ -13,6 +13,10 @@
 
   mySystem.enableGui = true;
 
+  homebrew.casks = [
+    "citrix-workspace"
+  ];
+
   networking.hostName = "codifier.narobin.com";
   networking.localHostName = "codifier";
   networking.computerName = "Codifier";

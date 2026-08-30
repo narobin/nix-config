@@ -15,7 +15,6 @@
         id = "blockjmkbacgjkknlgpkjjiijinjdanf";
         updateUrl = "https://raw.githubusercontent.com/imputnet/ublock-origin-crx/refs/heads/main/update.xml";
       }
-    ]
-    ;
+    ];
   };
 }
