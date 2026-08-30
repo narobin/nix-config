@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
-    ../modules/nixos
-    ../modules/shared
-    ../home/noah
+    ../../modules/nixos
+    ../../modules/shared
+    ../../home/noah
   ];
 
   mySystem.enableGui = true;

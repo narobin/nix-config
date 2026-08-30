@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
-    ../modules/darwin
-    ../modules/shared
-    ../home/cabine
+    ../../modules/darwin
+    ../../modules/shared
+    ../../home/cabine
   ];
 
   system.primaryUser = "cabine";

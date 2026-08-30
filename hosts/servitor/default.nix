@@ -1,12 +1,12 @@
 { ... }:
 {
   imports = [
-    ../modules/nixos/core
-    ../modules/nixos/security
-    ../modules/nixos/services
-    ../modules/shared
-    ../home/noah
-    ../home/cabine
+    ../../modules/nixos/core
+    ../../modules/nixos/security
+    ../../modules/nixos/services
+    ../../modules/shared
+    ../../home/noah
+    ../../home/cabine
   ];
 
   mySystem.enableGui = false;

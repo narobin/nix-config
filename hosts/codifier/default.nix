@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
-    ../modules/darwin
-    ../modules/shared
-    ../home/noah
+    ../../modules/darwin
+    ../../modules/shared
+    ../../home/noah
   ];
 
   system.primaryUser = "noah";
