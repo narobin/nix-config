@@ -70,6 +70,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
+            determinate.nixosModules.default
             home-manager-nixos.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -83,6 +84,9 @@
                 })
               ];
             }
+            ({ ... }: {
+              determinateNix.enable = true;
+            })
             sops-nix.nixosModules.sops
             module
           ];
