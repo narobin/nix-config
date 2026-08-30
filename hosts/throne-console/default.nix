@@ -1,11 +1,9 @@
 { ... }:
 {
   imports = [
-    ../modules/darwin/system.nix
-    ../modules/darwin/brew.nix
-    ../modules/shared/packages.nix
-    ../modules/shared/nix.nix
-    ../home/cabine/default.nix
+    ../modules/darwin
+    ../modules/shared
+    ../home/cabine
   ];
 
   system.primaryUser = "cabine";

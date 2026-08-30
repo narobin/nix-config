@@ -1,17 +1,17 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   homeDir = if isDarwin then /Users/${username} else "/home/${username}";
-  # sudoerGroup = if isDarwin then "admin" else "wheel";
 in
 {
   users.users.${username} = {
-    # isNormalUser = true;
     home = homeDir;
     shell = pkgs.zsh;
-    # extraGroups = [ sudoerGroup ];
+  } // lib.optionalAttrs (!isDarwin) {
+    extraGroups = [ "wheel" ];
+    isNormalUser = true;
   };
 
   home-manager.users.${username} = {

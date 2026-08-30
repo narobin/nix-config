@@ -1,7 +1,7 @@
-{ ... }:
+{ mySystem, ... }:
 {
   programs.firefox = {
-    enable = true;
+    enable = mySystem.enableGui;
     profiles.default = { };
   };
 }

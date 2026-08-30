@@ -5,7 +5,6 @@ input {
             model ""
             rules ""
             variant ""
-            options "caps:escape"
         }
         repeat-delay 600
         repeat-rate 25

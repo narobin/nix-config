@@ -1,10 +1,11 @@
-{ ... }:
+{ mySystem, ... }:
 {
   programs.zed-editor = {
-    enable = true;
+    enable = mySystem.enableGui;
     extensions = [
       "html"
       "nix"
+      "kdl"
     ];
     userSettings = {
       auto_update = false;
@@ -32,5 +33,13 @@
         dark = "Gruvbox Dark";
       };
     };
+    userKeymaps = [
+      {
+        context = "workspace";
+        bindings = {
+          
+        };
+      }
+    ];
   };
 }

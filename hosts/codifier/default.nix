@@ -1,12 +1,9 @@
 { ... }:
 {
   imports = [
-    ../modules/shared/settings.nix
-    ../modules/shared/nix.nix
-    ../modules/darwin/system.nix
-    ../modules/darwin/brew.nix
-    ../modules/shared/packages.nix
-    ../home/noah/default.nix
+    ../modules/darwin
+    ../modules/shared
+    ../home/noah
   ];
 
   system.primaryUser = "noah";
