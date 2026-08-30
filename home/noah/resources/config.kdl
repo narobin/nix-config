@@ -1,0 +1,78 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            model ""
+            rules ""
+            variant ""
+            options "caps:escape"
+        }
+        repeat-delay 600
+        repeat-rate 25
+        track-layout "global"
+    }
+    touchpad { tap; }
+}
+output "HDMI-A-1" {
+    background-color "#b3bdc1"
+    scale 2
+    transform "normal"
+}
+screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S Screenshot.png"
+prefer-no-csd
+layout {
+    gaps 5
+    struts {
+        left 10
+        right 10
+        top 10
+        bottom 10
+    }
+    focus-ring {
+        width 4
+        active-color "#cba6f7"
+        inactive-color "#505050"
+    }
+    border { off; }
+    default-column-width { proportion 0.500000; }
+    preset-column-widths {
+        proportion 0.333333
+        proportion 0.500000
+        proportion 0.666667
+    }
+    center-focused-column "never"
+}
+cursor {
+    xcursor-theme "default"
+    xcursor-size 24
+}
+binds {
+    Mod+BracketLeft { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+C { center-column; }
+    Mod+Comma { consume-window-into-column; }
+    Mod+Ctrl+Shift+R { switch-preset-window-height; }
+    Mod+F { maximize-column; }
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+    Mod+P { screenshot; }
+    Mod+Period { expel-window-from-column; }
+    Mod+Q { close-window; }
+    Mod+R { switch-preset-column-width; }
+    Mod+Return { spawn "ghostty"; }
+    Mod+Shift+E { quit; }
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+R { switch-preset-column-width-back; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Space { spawn "rofi" "-show" "drun"; }
+    Mod+V { toggle-window-floating; }
+    XF86AudioLowerVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioRaiseVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+}
+spawn-at-startup "ghostty"
