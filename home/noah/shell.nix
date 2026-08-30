@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -16,6 +16,7 @@
     EDITOR = lib.mkForce "nvim";
     VISUAL = lib.mkForce "nvim";
     PAGER = "moor";
+    SOPS_AGE_KEY_FILE="${config.home.homeDirectory}/.config/sops/age/keys.txt";
   };
 
   programs.fish = {

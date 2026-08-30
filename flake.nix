@@ -32,7 +32,7 @@
       nix-darwin,
       home-manager-nixos,
       home-manager-darwin,
-      sops-nix
+      sops-nix,
     }@inputs:
     let
       mkDarwinHost =
@@ -116,11 +116,14 @@
             git
             sops
             age
+            fish
           ];
 
-          shellHook = ''
-            export NIX_PATH="nixpkgs=${nixpkgs-darwin}"
-          '';
+          env = {
+            NIX_PATH = "nixpkgs=${nixpkgs-darwin}";
+          };
+
+          shellHook = "exec fish";
         };
     };
 }

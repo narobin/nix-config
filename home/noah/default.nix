@@ -1,17 +1,26 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-  homeDir = if isDarwin then /Users/${username} else "/home/${username}";
+  homeDir = if isDarwin then /Users/${username} else /home/${username};
 in
 {
   users.users.${username} = {
     home = homeDir;
     shell = pkgs.zsh;
-  } // lib.optionalAttrs (!isDarwin) {
+  }
+  // lib.optionalAttrs (!isDarwin) {
     extraGroups = [ "wheel" ];
     isNormalUser = true;
+    openssh.authorizedKeys.keyFiles = [
+      ./resources/remote-access.pub
+    ];
   };
 
   home-manager.users.${username} = {
