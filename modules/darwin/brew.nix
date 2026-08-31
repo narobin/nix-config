@@ -10,6 +10,7 @@
       "affinity"
       "ungoogled-chromium"
       "logi-options+"
+      "zen"
     ];
 
     masApps = {
