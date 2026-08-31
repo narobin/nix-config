@@ -1,9 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../modules/nixos/core
-    ../../modules/nixos/security
-    ../../modules/nixos/services
+    ../../modules/nixos
     ../../modules/shared
     ../../home/noah
     ../../home/cabine
