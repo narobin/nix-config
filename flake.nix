@@ -56,11 +56,6 @@
               ];
             }
             sops-nix.darwinModules.sops
-
-            ({ ... }: {
-              determinateNix.enable = true;
-            })
-
             module
           ];
         };
