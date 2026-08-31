@@ -56,6 +56,9 @@
               ];
             }
             sops-nix.darwinModules.sops
+            ({ ... }: {
+              determinateNix.enable = true;
+            })
             module
           ];
         };
@@ -79,9 +82,6 @@
                 })
               ];
             }
-            ({ ... }: {
-              determinateNix.enable = true;
-            })
             sops-nix.nixosModules.sops
             module
           ];
