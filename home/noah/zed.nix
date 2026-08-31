@@ -47,6 +47,7 @@
         context = "Workspace";
         bindings = {
           "cmd-o" = "file_finder::Toggle";
+          "cmd-shift-o" = "projects::OpenRecent";
           "cmd-p" = "command_palette::Toggle";
         };
       }
