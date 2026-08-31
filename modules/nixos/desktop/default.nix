@@ -5,5 +5,6 @@
     ./bluetooth.nix
     ./niri.nix
     ./printing.nix
+    ./steam.nix
   ];
 }

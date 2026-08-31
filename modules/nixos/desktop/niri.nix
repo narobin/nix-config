@@ -29,4 +29,13 @@
   systemd.services.greetd.serviceConfig.Type = "idle";
 
   systemd.user.services.niri.enableDefaultPath = false;
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    GDK_BACKEND = "wayland";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
 }
