@@ -7,6 +7,10 @@
       "nix"
       "kdl"
     ];
+
+    mutableUserSettings = false;
+    mutableUserKeymaps = false;
+
     userSettings = {
       auto_update = false;
       diff_view_style = "split";
@@ -35,9 +39,15 @@
     };
     userKeymaps = [
       {
-        context = "workspace";
+        unbind = {
+          "cmd-o" = "workspace::Open";
+        };
+      }
+      {
+        context = "Workspace";
         bindings = {
-          
+          "cmd-o" = "file_finder::Toggle";
+          "cmd-p" = "command_palette::Toggle";
         };
       }
     ];
