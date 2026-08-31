@@ -9,6 +9,7 @@
       "orion"
       "affinity"
       "ungoogled-chromium"
+      "logi-options+"
     ];
 
     masApps = {
