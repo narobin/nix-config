@@ -8,7 +8,7 @@
 let
   username = "noah";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-  homeDir = if isDarwin then /Users/${username} else /home/${username};
+  homeDir = if isDarwin then /Users/${username} else "/home/${username}";
 in
 {
   users.users.${username} = {
