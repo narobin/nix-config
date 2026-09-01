@@ -40,6 +40,7 @@ in
       ./chromium.nix
       ./1password.nix
       ./neovim.nix
+      ./direnv.nix
     ];
   };
 }

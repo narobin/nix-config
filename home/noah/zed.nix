@@ -36,6 +36,7 @@
         light = "Gruvbox Light";
         dark = "Gruvbox Dark";
       };
+      load_direnv = "shell_hook";
     };
     userKeymaps = [
       {
