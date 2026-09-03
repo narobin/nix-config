@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./1password.nix
     ./fonts.nix
     ./nix.nix
     ./packages.nix
