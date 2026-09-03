@@ -41,6 +41,7 @@ in
       ./1password.nix
       ./neovim.nix
       ./direnv.nix
+      ./zen.nix
     ];
   };
 }
