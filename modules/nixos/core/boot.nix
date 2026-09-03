@@ -140,7 +140,7 @@
       "net.ipv4.conf.default.send_redirects" = false;
     };
   };
-  
+
   environment = {
     memoryAllocator.provider = "hardened_malloc";
   };
