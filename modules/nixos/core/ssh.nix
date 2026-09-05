@@ -18,7 +18,7 @@
       MaxAuthTries = 3;
       PerSourcePentalties = "crash:3600s authfail:3600s max:86400s";
       X11Forwarding = false;
-      useDns = false;
+      UseDns = false;
       StreamLocalBindUnlink = true;
       LoginGaceTime = 30;
       AllowTcpForwarding = "no";
