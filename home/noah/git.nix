@@ -5,7 +5,7 @@
 }:
 let
   sshSignPath =
-    if pkgs.stdenv.isDarwin then
+    if pkgs.stdenv.hostPlatform.isDarwin then
       "${pkgs._1password-gui}/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
     else
       "${pkgs._1password-gui}/share/1password/op-ssh-sign";
