@@ -7,8 +7,10 @@
 
     wireless = {
       enable = config.mySystem.enableWireless;
-      secretsFile = config.sops.secrets.networking.path;
-      networks."Unit 221".pskRaw = "ext:UNIT_221";
+      secretsFile = config.sops.secrets."wifi.env".path;
+      networks = {
+        "Unit 221".psk = "@UNIT_221_PSK@";
+      };
     };
   };
 }
