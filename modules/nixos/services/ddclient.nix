@@ -22,17 +22,17 @@
     };
   };
 
-  config = lib.mkIf config.services.ddns.enable {
+  config = lib.mkIf config.ddns.enable {
     assertions = [
       {
-        assertion = config.services.ddns.domain != null;
-        message = "services.ddns.domain must be set when services.ddns.enable is true";
+        assertion = config.ddns.domain != null;
+        message = "ddns.domain must be set when ddns.enable is true";
       }
     ];
 
     services.ddclient = {
       enable = true;
-      interval = config.services.ddns.interval;
+      interval = config.ddns.interval;
       protocol = "cloudflare";
       username = "token";
       passwordFile = config.sops.secrets."cloudflare/token".path;
