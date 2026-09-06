@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [
     ../../modules/nixos
@@ -11,6 +11,11 @@
   mySystem = {
     enableGui = true;
     enableWireless = true;
+  };
+
+  config.services.ddns = {
+    enable = true;
+    domain = "vrrr.narobin.com";
   };
 
   networking.hostName = "vrrr";
