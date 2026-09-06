@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   imports = [
     ../../modules/nixos
@@ -8,12 +8,12 @@
     ./system.nix
   ];
 
-  config.mySystem = {
+  mySystem = {
     enableGui = true;
     enableWireless = true;
   };
 
-  config.services.ddns = {
+  services.ddns = {
     enable = true;
     domain = "vrrr.narobin.com";
   };
