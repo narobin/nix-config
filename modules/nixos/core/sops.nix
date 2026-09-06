@@ -5,11 +5,12 @@
   
     defaultSopsFile = ../../../secrets/default.yaml;
 
-    sops.secrets."cloudflare/token" = {};
-
     secrets = {
       "cloudflare/token" = {};
       "wireless/unit_221-psk" = {};
+      "noah/password" = {
+        neededForUsers = true;  
+      };
     };
 
     sops.template."wifi.env" = {

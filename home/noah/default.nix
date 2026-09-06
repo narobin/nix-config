@@ -21,6 +21,7 @@ in
     openssh.authorizedKeys.keyFiles = [
       ./resources/remote-access.pub
     ];
+    hashedPasswordFile = config.sops.secrets."noah/password".path;
   };
 
   home-manager.users.${username} = {
