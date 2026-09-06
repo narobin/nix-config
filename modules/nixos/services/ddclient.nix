@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.services.ddns = {
+  options.ddns = {
     enable = lib.mkEnableOption "ddns";
 
     domain = lib.mkOption {

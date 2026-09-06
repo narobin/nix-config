@@ -13,7 +13,7 @@
     enableWireless = true;
   };
 
-  services.ddns = {
+  ddns = {
     enable = true;
     domain = "vrrr.narobin.com";
   };
