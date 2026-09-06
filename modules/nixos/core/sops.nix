@@ -13,9 +13,9 @@
       };
     };
 
-    sops.template."wifi.env" = {
+    template."wifi.env" = {
       content = ''
-        UNIT_221_PSK=${config.sops.placeholder."wifi/unit-221-psk"}
+        UNIT_221_PSK=${config.sops.placeholder."wireless/unit_221-psk"}
       '';
     };
   };
