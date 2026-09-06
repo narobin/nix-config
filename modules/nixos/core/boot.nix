@@ -8,6 +8,16 @@
   nix.settings.allowed-users = [ "@users" ];
 
   boot = {
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
+    supportedFilesystems = [ "btrfs" ];
+    initrd = {
+      supportedFilesystems = [ "btrfs" ];
+      availableKernelModules = [ "nvme" ];
+      kernelModules = [ "btrfs" ];
+    };
     # kernelModules = [ ];
     blacklistedKernelModules = [
       # Unused/Obscure Filesystems
@@ -88,7 +98,6 @@
 
       # Testing
       "vivid"
-      "btrfs"
 
       # Intel
       "intel_mei"
@@ -142,6 +151,6 @@
   };
 
   environment = {
-    memoryAllocator.provider = "hardened_malloc";
+    #memoryAllocator.provider = "graphene-hardened";
   };
 }

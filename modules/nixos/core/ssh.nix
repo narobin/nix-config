@@ -16,11 +16,11 @@
       PermitRootLogin = "no";
       AllowUsers = [ "noah" ];
       MaxAuthTries = 3;
-      PerSourcePentalties = "crash:3600s authfail:3600s max:86400s";
+      PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
       X11Forwarding = false;
       UseDns = false;
       StreamLocalBindUnlink = true;
-      LoginGaceTime = 30;
+      LoginGraceTime = 30;
       AllowTcpForwarding = "no";
       PermitTunnel = "no";
       GatewayPorts = "no";

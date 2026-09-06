@@ -16,8 +16,9 @@ in
     shell = pkgs.zsh;
   }
   // lib.optionalAttrs (!isDarwin) {
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     isNormalUser = true;
+    uid = 1000;
     openssh.authorizedKeys.keyFiles = [
       ./resources/remote-access.pub
     ];
@@ -42,6 +43,7 @@ in
       ./1password.nix
       ./neovim.nix
       ./direnv.nix
+      ./niri.nix
     ];
   };
 }

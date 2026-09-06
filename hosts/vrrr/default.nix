@@ -4,6 +4,8 @@
     ../../modules/nixos
     ../../modules/shared
     ../../home/noah
+    ./hardware.nix
+    ./system.nix
   ];
 
   mySystem = {
@@ -11,7 +13,7 @@
     enableWireless = true;
   };
 
-  networking.hostName = "vrrr.narobin.com";
+  networking.hostName = "vrrr";
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "26.05";
 }

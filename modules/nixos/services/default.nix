@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./ddclient.nix
+    #./ddclient.nix
     ./kerberos.nix
   ];
 }
