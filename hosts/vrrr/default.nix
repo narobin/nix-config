@@ -8,7 +8,7 @@
     ./system.nix
   ];
 
-  mySystem = {
+  config.mySystem = {
     enableGui = true;
     enableWireless = true;
   };
