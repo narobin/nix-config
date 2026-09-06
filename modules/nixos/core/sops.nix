@@ -14,6 +14,10 @@
     };
 
     templates."wifi.env" = {
+      owner = "wpa_supplicant";
+      group = "wpa_supplicant";
+      mode = "0400";
+ 
       content = ''
         UNIT_221_PSK=${config.sops.placeholder."wireless/unit_221-psk"}
       '';
