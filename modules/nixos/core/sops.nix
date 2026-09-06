@@ -13,7 +13,7 @@
       };
     };
 
-    template."wifi.env" = {
+    templates."wifi.env" = {
       content = ''
         UNIT_221_PSK=${config.sops.placeholder."wireless/unit_221-psk"}
       '';
