@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   sops = {
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
@@ -17,5 +17,6 @@
       content = ''
         UNIT_221_PSK=${config.sops.placeholder."wifi/unit-221-psk"}
       '';
+    };
   };
 }
