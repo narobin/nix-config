@@ -1,0 +1,15 @@
+{ ... }:
+{
+  imports = [
+    ../../modules/nixos
+    ../../modules/shared
+    ../../home/noah
+    ../../home/cabine
+  ];
+
+  mySystem.enableGui = false;
+
+  networking.hostName = "servitor.narobin.com";
+  nixpkgs.hostPlatform = "x86_64-linux";
+  system.stateVersion = 6;
+}

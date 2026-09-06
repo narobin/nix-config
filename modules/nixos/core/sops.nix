@@ -1,0 +1,19 @@
+{ config, ... }:
+{
+  sops = {
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  
+    defaultSopsFile = ../../../secrets/default.yaml;
+
+    secrets = {
+      "cloudflare/token" = {};
+      "wireless/unit_221-psk" = {};
+    };
+
+    templates."wifi.env" = {
+      content = ''
+        UNIT_221_PSK=${config.sops.placeholder."wireless/unit_221-psk"}
+      '';
+    };
+  };
+}
