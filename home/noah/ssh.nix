@@ -8,6 +8,7 @@ let
 in
 {
   home.file.".ssh/github.pub".source = ./resources/github.pub;
+  home.file.".ssh/remote-access.pub".source = ./resources/remote-access.pub;
 
   programs.ssh = {
     enable = true;
