@@ -6,12 +6,15 @@
   boot.kernelModules = [ "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
+  powerManagement.enable = true;
+
   # NVIDIA
   # TODO: move to module with option
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
+    powerManagement.enable = true;
     nvidiaSettings = true;
     branch = "legacy_580";
   };
@@ -23,4 +26,3 @@
     ];
   };
 }
-
