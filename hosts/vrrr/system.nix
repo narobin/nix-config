@@ -8,6 +8,13 @@
 
   powerManagement.enable = true;
 
+  networking.interfaces.wlp3s0.wakeOnLan.enable = true;
+
+  services.logind.extraConfig = ''
+    IdleAction=suspend
+    IdleActionSec=10min
+  ''
+
   # NVIDIA
   # TODO: move to module with option
   services.xserver.videoDrivers = [ "nvidia" ];
