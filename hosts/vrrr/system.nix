@@ -11,8 +11,8 @@
   networking.interfaces.wlp3s0.wakeOnLan.enable = true;
 
   services.logind.settings.Login = {
-    IdleAction="suspend"
-    IdleActionSec="10min"
+    IdleAction="suspend";
+    IdleActionSec="10min";
   };
 
   # NVIDIA
