@@ -27,6 +27,11 @@
     branch = "legacy_580";
   };
 
+  boot.extraModprobeConfig = ''
+    options nvidia_drm modeset=1 fbdev=0
+    options nvidia_modeset vblank_sem_control=0
+  '';
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
