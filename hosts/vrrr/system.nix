@@ -10,10 +10,10 @@
 
   networking.interfaces.wlp3s0.wakeOnLan.enable = true;
 
-  services.logind.extraConfig = ''
-    IdleAction=suspend
-    IdleActionSec=10min
-  '';
+  services.logind.settings.Login = {
+    IdleAction="suspend"
+    IdleActionSec="10min"
+  };
 
   # NVIDIA
   # TODO: move to module with option
