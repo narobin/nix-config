@@ -29,6 +29,7 @@
 
     shellAbbrs = {
       drs = "sudo darwin-rebuild switch --flake .#";
+      nrs = "sudo nixos-rebuild switch --flake github:narobin/nix-config#";
       zed = "zeditor .";
     };
 
