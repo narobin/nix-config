@@ -10,7 +10,7 @@
     initContent = ''
       if [[ $- == *i* ]] \
         && [ -z "$ZSH_EXECUTION_STRING" ] \
-        && [[ "$(< /proc/$PPID/comm)" != "fish" ]]
+        && [[ "$(ps -p $PPID -o comm=)" != *fish* ]]
       then
         exec ${lib.getExe pkgs.fish} --login
       fi
