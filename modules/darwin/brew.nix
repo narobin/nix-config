@@ -11,6 +11,7 @@
       "ungoogled-chromium"
       "logi-options+"
       "zen"
+      "onyx"
     ];
 
     masApps = {
