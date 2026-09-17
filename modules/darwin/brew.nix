@@ -19,6 +19,7 @@
       "Things" = 904280696;
       "Mela" = 1568924476;
       "Wireguard" = 1451685025;
+      "Numbers" = 361304891;
     };
 
     onActivation = {
