@@ -7,6 +7,8 @@
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
       vim.opt.softtabstop = 2
+      vim.opt.smarttab = true
+      vim.opt.shiftround = true
       vim.opt.smartindent = true
       vim.opt.autoindent = true
 
@@ -20,7 +22,7 @@
       vim.opt.smartcase = true
       vim.opt.hlsearch = true
       vim.opt.incsearch = true
-      
+
       vim.opt.number = true
       vim.opt.relativenumber = true
       vim.opt.signcolumn = "yes"
@@ -37,9 +39,9 @@
       vim.opt.undofile = true
       vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
       vim.opt.completeopt = "menuone,noselect"
-      
+
       vim.opt.foldmethod = "indent"
-      vim.opt.foldlevel = 99 
+      vim.opt.foldlevel = 99
     '';
   };
 }
