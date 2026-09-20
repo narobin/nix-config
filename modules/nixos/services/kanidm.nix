@@ -50,8 +50,8 @@
         templates."kanidm-tunnel.json" = {
           content = ''
             {
-              "AccountTag": "${config.sops.placeholder."cloudflare/kanidm/account-tag"}"
-              "TunnelSecret": "${config.sops.placeholder."cloudflare/kanidm/tunnel-secret"}"
+              "AccountTag": "${config.sops.placeholder."cloudflare/kanidm/account-tag"}",
+              "TunnelSecret": "${config.sops.placeholder."cloudflare/kanidm/tunnel-secret"}",
               "TunnelID": "${config.sops.placeholder."cloudflare/kanidm/tunnel-id"}"
             }
           '';
