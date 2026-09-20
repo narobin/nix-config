@@ -74,12 +74,8 @@
       services.kanidm.server = {
         enable = true;
         settings = {
-          db_path = "/data/kanidm/kanidm.db";
           domain = "narobin.com";
           origin = "https://idm.narobin.com";
-          online_backup = {
-            path = "/data/kanidm/backups";
-          };
           tls_chain = config.sops.secrets."cloudflare/kanidm/certificate".path;
           tls_key = config.sops.secrets."cloudflare/kanidm/private-key".path;
         };
