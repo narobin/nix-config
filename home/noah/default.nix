@@ -44,6 +44,7 @@ in
       ./neovim.nix
       ./direnv.nix
       ./niri.nix
+      ./zellij.nix
     ];
   };
 }
