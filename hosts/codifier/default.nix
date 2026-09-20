@@ -14,6 +14,8 @@
     "citrix-workspace"
   ];
 
+  services.tailscale.enable = true;
+
   networking.hostName = "codifier.narobin.com";
   networking.localHostName = "codifier";
   networking.computerName = "Codifier";
