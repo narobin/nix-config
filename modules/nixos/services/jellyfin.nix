@@ -60,14 +60,27 @@
 
       systemd.services.advertise-jellyfin = lib.mkIf config.services.tailscale.enable {
         description = "Advertise and enable TLS for svc:jellyfin";
-        after = [ "tailscaled.service" ];
+        after = [
+          "tailscaled.service"
+          "network-online.target"
+        ];
+        wants = [ "network-online.target" ];
         bindsTo = [ "tailscaled.service" ];
         wantedBy = [ "multi-user.target" ];
         path = [ pkgs.tailscale ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
+          ExecStartPre = pkgs.writeShellScript "wait-for-tailscaled" ''
+            for i in $(seq 1 30); do
+              tailscale status --peers=false >/dev/null 2>&1 && exit 0
+              sleep 1
+            done
+            echo "tailscaled not ready after 30s" >&2
+            exit 1
+          '';
           ExecStart = pkgs.writeShellScript "advertise-jellyfin" ''
+            set -e
             tailscale serve --yes --service=svc:jellyfin --https=443 http://localhost:8096
             tailscale serve advertise svc:jellyfin
           '';
