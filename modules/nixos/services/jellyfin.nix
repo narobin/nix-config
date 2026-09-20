@@ -62,6 +62,7 @@
         description = "Advertise and enable TLS for svc:jellyfin";
         after = [ "tailscaled.service" ];
         bindsTo = [ "tailscaled.service" ];
+        wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
