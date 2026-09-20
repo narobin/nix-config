@@ -47,10 +47,6 @@
         };
 
         templates."kanidm-tunnel.json" = {
-          owner = "cloudflared";
-          group = "cloudflared";
-          mode = "0400";
-
           content = ''
             {
               "AccountTag": "${config.sops.placeholder."cloudflare/kanidm/account-tag"}"
