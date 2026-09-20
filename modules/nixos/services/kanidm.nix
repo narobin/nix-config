@@ -36,6 +36,7 @@
           "cloudflare/kanidm/account-tag" = { };
           "cloudflare/kanidm/tunnel-secret" = { };
           "cloudflare/kanidm/tunnel-id" = { };
+          "cloudflare/kanidm/tunnel-cert" = { };
           "cloudflare/kanidm/certificate" = {
             owner = "kanidm";
             group = "kanidm";
@@ -58,6 +59,7 @@
       };
 
       services.cloudflared.tunnels."kanidm" = lib.mkIf (cfg.mode == "tunnel") {
+        certificateFile = config.sops.secrets."cloudflare/kanidm/tunnel-cert".path;
         credentialsFile = config.sops.templates."kanidm-tunnel.json".path;
         default = "http_status:404";
         ingress = {
