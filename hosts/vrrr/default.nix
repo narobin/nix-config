@@ -30,7 +30,7 @@
 
   services.tailscale = {
     enable = true;
-    serve.enable = true;
+    # serve.enable = true;
   };
 
   networking.hostName = "vrrr";
