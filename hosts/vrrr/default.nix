@@ -21,13 +21,17 @@
 
   jellyfin = {
     enable = true;
+    tailscale.enable = true;
   };
 
   services.cloudflared.enable = true;
 
   kanidm.server.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    serve.enable = true;
+  };
 
   networking.hostName = "vrrr";
   nixpkgs.hostPlatform = "x86_64-linux";

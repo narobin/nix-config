@@ -9,6 +9,8 @@
     };
 
     hardwareAcceleration.enable = lib.mkEnableOption "jellyfin hardware acceleration";
+
+    tailscale.enable = lib.mkEnableOption "tailscale-jellyfin-serve";
   };
 
   config =
@@ -20,6 +22,14 @@
         {
           assertion = cfg.hardwareAcceleration.enable -> config.mySystem.renderDevice != null;
           message = "mySystem.renderDevice must be set when hardware acceleration is true";
+        }
+        {
+          assertion = cfg.tailscale.enable -> config.services.tailscale.enable == true;
+          message = "services.tailscale.enable must be true when jellyfin.tailscale.enable is true";
+        }
+        {
+          assertion = cfg.tailscale.enable -> config.services.tailscale.serve.enable == true;
+          message = "services.tailscale.serve.enable must be true when jellyfin.tailscale.enable is true";
         }
       ];
 
