@@ -19,6 +19,7 @@
       cargo
       moor
       github-cli
+      rsync
     ]
     ++ lib.optionals config.mySystem.enableGui [
     ];
