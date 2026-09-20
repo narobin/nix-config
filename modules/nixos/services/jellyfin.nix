@@ -48,7 +48,7 @@
 
       services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
         endpoints = {
-          "tcp:8096" = "http://localhost:8096";
+          "tcp:443" = "http://localhost:8096";
         };
         advertised = true;
       };
