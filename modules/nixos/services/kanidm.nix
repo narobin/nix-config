@@ -63,7 +63,7 @@
         credentialsFile = config.sops.templates."kanidm-tunnel.json".path;
         default = "http_status:404";
         ingress = {
-          "idm.narobin.com" = "https://localhost:8443";
+          "idm.narobin.com" = "https://127.0.0.1:8443";
         };
       };
 
@@ -72,7 +72,7 @@
       services.kanidm.server = {
         enable = true;
         settings = {
-          bindaddress = "localhost:8443";
+          bindaddress = "127.0.0.1:8443";
           domain = "narobin.com";
           origin = "https://idm.narobin.com";
           tls_chain = config.sops.secrets."cloudflare/kanidm/certificate".path;
