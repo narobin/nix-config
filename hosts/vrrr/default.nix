@@ -11,11 +11,16 @@
   mySystem = {
     enableGui = true;
     enableWireless = true;
+    renderDevice = "/dev/dri/by-path/pci-0000:01:00.0-render";
   };
 
   ddns = {
-    enable = true;
+    enable = false;
     domain = "vrrr.narobin.com";
+  };
+
+  jellyfin = {
+    enable = true;
   };
 
   networking.hostName = "vrrr";
