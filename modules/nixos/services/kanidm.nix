@@ -65,6 +65,9 @@
         ingress = {
           "idm.narobin.com" = "https://127.0.0.1:8443";
         };
+        originRequest = {
+          noTLSVerify = true;
+        };
       };
 
       services.kanidm.package = pkgs.kanidm_1_11;
