@@ -64,7 +64,7 @@
         };
       };
 
-      services.kanidm = {
+      services.kanidm.server = {
         enable = true;
         settings = {
           db_path = "/data/kanidm/kanidm.db";
