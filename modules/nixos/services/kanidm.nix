@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options = {
     kanidm.server = {
@@ -63,6 +68,8 @@
           "idm.narobin.com" = config.services.kanidm.server.settings.bindaddress;
         };
       };
+
+      services.kanidm.package = pkgs.kanidm_1_11;
 
       services.kanidm.server = {
         enable = true;
