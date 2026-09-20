@@ -23,6 +23,10 @@
     enable = true;
   };
 
+  services.cloudflared.enable = true;
+
+  kanidm.server.enable = true;
+
   networking.hostName = "vrrr";
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "26.05";
