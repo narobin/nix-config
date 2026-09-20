@@ -63,7 +63,7 @@
         credentialsFile = config.sops.templates."kanidm-tunnel.json".path;
         default = "http_status:404";
         ingress = {
-          "idm.narobin.com" = config.services.kanidm.server.settings.bindaddress;
+          "idm.narobin.com" = "https://localhost:8443";
         };
       };
 
