@@ -72,6 +72,7 @@
       services.kanidm.server = {
         enable = true;
         settings = {
+          bindaddress = "localhost:8443";
           domain = "narobin.com";
           origin = "https://idm.narobin.com";
           tls_chain = config.sops.secrets."cloudflare/kanidm/certificate".path;
