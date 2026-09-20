@@ -20,6 +20,7 @@
       moor
       github-cli
       rsync
+      ouch
     ]
     ++ lib.optionals config.mySystem.enableGui [
     ];
