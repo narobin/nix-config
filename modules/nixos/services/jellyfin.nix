@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options.jellyfin = {
     enable = lib.mkEnableOption "jellyfin";
