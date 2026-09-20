@@ -51,12 +51,12 @@
         };
       };
 
-      services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
-        endpoints = {
-          "tcp:443" = "http://localhost:8096";
-        };
-        advertised = true;
-      };
+      # services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
+      #   endpoints = {
+      #     "tcp:443" = "http://localhost:8096";
+      #   };
+      #   advertised = true;
+      # };
 
       systemd.services.advertise-jellyfin = {
         description = "Advertise and enable TLS for svc:jellyfin";
