@@ -118,6 +118,14 @@ in
       url = {
         "git@github.com:".insteadOf = "https://github.com";
       };
+
+      init = {
+        defaultBackend = "files";
+      };
+
+      clone = {
+        defaultBackend = "files";
+      };
     };
   };
 }
