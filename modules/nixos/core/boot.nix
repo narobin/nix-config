@@ -7,6 +7,8 @@
 
   nix.settings.allowed-users = [ "@users" ];
 
+  systemd.network.wait-online.enable = false;
+
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -17,6 +19,7 @@
       supportedFilesystems = [ "btrfs" ];
       availableKernelModules = [ "nvme" ];
       kernelModules = [ "btrfs" ];
+      systemd.network.wait-online.enable = false;
     };
     # kernelModules = [ ];
     blacklistedKernelModules = [
