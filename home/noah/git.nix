@@ -121,6 +121,7 @@ in
 
       init = {
         defaultBackend = "files";
+        defaultBranch = "master";
       };
 
       clone = {
