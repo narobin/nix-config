@@ -1,12 +1,12 @@
 { pkgs, ... }: {
   powerManagement.enable = true;
 
-  networking.interfaces.wlp3s0.wakeOnLan.enable = true;
+  # networking.interfaces.wlp3s0.wakeOnLan.enable = true;
 
-  services.logind.settings.Login = {
-    IdleAction = "suspend";
-    IdleActionSec = "10min";
-  };
+  # services.logind.settings.Login = {
+  #   IdleAction = "suspend";
+  #   IdleActionSec = "10min";
+  # };
 
   # NVIDIA
   # TODO: move to module with option

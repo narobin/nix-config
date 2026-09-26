@@ -12,11 +12,11 @@
     };
   };
 
-  systemd.timers.nixos-upgrade = {
-    timerConfig = {
-      OnCalendar = "04:00";
-      WakeSystem = true;
-      AccuracySec = "1min";
-    };
-  };
+  # systemd.timers.nixos-upgrade = {
+  #   timerConfig = {
+  #     OnCalendar = "04:00";
+  #     WakeSystem = true;
+  #     AccuracySec = "1min";
+  #   };
+  # };
 }
