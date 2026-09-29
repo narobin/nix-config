@@ -87,7 +87,7 @@
     in
     {
       nixosConfigurations = {
-        servitor = mkHost ./hosts/servitor;
+        # servitor = mkHost ./hosts/servitor;
         vrrr = mkHost ./hosts/vrrr;
       };
 
@@ -96,23 +96,33 @@
         codifier = mkDarwinHost ./hosts/codifier;
       };
     }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nil
-            nixd
-            nixfmt
-            git
-            sops
-            age
-            fish
-          ];
-        };
-      }
-    );
+    //
+      flake-utils.lib.eachSystem
+        [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ]
+        (
+          system:
+          let
+            pkgs = import nixpkgs { inherit system; };
+          in
+          {
+            devShells.default = pkgs.mkShell {
+              buildInputs = with pkgs; [
+                nil
+                nixd
+                nixfmt
+                git
+                sops
+                age
+                fish
+                kanidm_1_11
+                just
+              ];
+
+              env.KANIDM_URL = "https://idm.narobin.com";
+            };
+          }
+        );
 }

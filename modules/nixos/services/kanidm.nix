@@ -45,6 +45,18 @@
             owner = "kanidm";
             group = "kanidm";
           };
+          "kanidm/admin-password" = {
+            owner = "kanidm";
+            group = "kanidm";
+          };
+          "kanidm/idm-admin-password" = {
+            owner = "kanidm";
+            group = "kanidm";
+          };
+          "kanidm/tailscale-basic-secret" = {
+            owner = "kanidm";
+            group = "kanidm";
+          };
         };
 
         templates."kanidm-tunnel.json" = {
@@ -70,7 +82,7 @@
         };
       };
 
-      services.kanidm.package = pkgs.kanidm_1_11;
+      services.kanidm.package = pkgs.kanidmWithSecretProvisioning_1_11;
 
       services.kanidm.server = {
         enable = true;
@@ -82,5 +94,48 @@
           tls_key = config.sops.secrets."cloudflare/kanidm/private-key".path;
         };
       };
+
+      services.kanidm.provision = {
+        enable = true;
+
+        adminPasswordFile = config.sops.secrets."kanidm/admin-password".path;
+        idmAdminPasswordFile = config.sops.secrets."kanidm/idm-admin-password".path;
+
+        groups = {
+          "tailnet_users" = { };
+          "idm_people_on_boarding" = { };
+        };
+
+        persons = {
+          "cabine" = {
+            displayName = "Zach Rice";
+            mailAddresses = [ "cabine@narobin.com" ];
+            groups = [ "tailnet_users" ];
+          };
+          "noah" = {
+            displayName = "Noah Robinson";
+            mailAddresses = [ "noah@narobin.com" ];
+            groups = [
+              "tailnet_users"
+              "idm_people_on_boarding"
+            ];
+          };
+        };
+
+        systems.oauth2 = {
+          "tailscale" = {
+            displayName = "Tailscale";
+            originUrl = "https://login.tailscale.com/a/oauth_response";
+            originLanding = "https://login.tailscale.com/";
+            basicSecretFile = config.sops.secrets."kanidm/tailscale-basic-secret".path;
+            scopeMaps."tailnet_users" = [
+              "openid"
+              "email"
+              "profile"
+            ];
+          };
+        };
+      };
+
     };
 }

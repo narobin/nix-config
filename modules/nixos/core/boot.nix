@@ -15,6 +15,10 @@
       systemd-boot.enable = true;
     };
     supportedFilesystems = [ "btrfs" ];
+    tmp = {
+      tmpfsSize = "50%";
+      useTmpfs = true;
+    };
     initrd = {
       supportedFilesystems = [ "btrfs" ];
       availableKernelModules = [ "nvme" ];
