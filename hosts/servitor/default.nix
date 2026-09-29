@@ -11,5 +11,5 @@
 
   networking.hostName = "servitor.narobin.com";
   nixpkgs.hostPlatform = "x86_64-linux";
-  system.stateVersion = 6;
+  system.stateVersion = "26.05";
 }

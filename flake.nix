@@ -87,7 +87,7 @@
     in
     {
       nixosConfigurations = {
-        # servitor = mkHost ./hosts/servitor;
+        servitor = mkHost ./hosts/servitor;
         vrrr = mkHost ./hosts/vrrr;
       };
 
