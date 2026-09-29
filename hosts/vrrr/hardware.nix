@@ -77,7 +77,21 @@
     options = [ "noatime" ];
   };
 
-  swapDevices = [ ];
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/0f8a4ebc-5ddd-47aa-8d59-82ccf616b524";
+    fsType = "btrfs";
+    options = [
+      "subvol=swap"
+      "noatime"
+    ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 32 * 1024;
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
