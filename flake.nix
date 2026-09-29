@@ -111,7 +111,10 @@
             sops
             age
             fish
+            kanidm_1_11
           ];
+
+          env.KANIDM_URL = "https://idm.narobin.com";
         };
       }
     );
