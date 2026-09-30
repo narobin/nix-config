@@ -5,5 +5,6 @@
     ./kanidm.nix
     ./tailscale.nix
     ./immich.nix
+    ./forge.nix
   ];
 }
