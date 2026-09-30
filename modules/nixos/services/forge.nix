@@ -58,10 +58,13 @@
             SSH_PORT = 22;
           };
           service = {
-            # DISABLE_REGISTRATION = true;
-            # ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
+            DISABLE_REGISTRATION = true;
+            ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
             # ENABLE_INTERNAL_SIGNIN = false;
             # ENABLE_BASIC_AUTHENTICATION = false;
+          };
+          oauth2_client = {
+            ENABLE_AUTO_REGISTRATION = true;
           };
         };
       };
