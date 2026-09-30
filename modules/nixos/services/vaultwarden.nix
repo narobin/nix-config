@@ -56,10 +56,10 @@
       };
 
       services.vaultwarden = {
-        domain = "https://${hostname}";
         config = {
           # Hosting
-          ROCKET_ADDRESS = "0.0.0.0";
+          DOMAIN = "https://${hostname}";
+          ROCKET_ADDRESS = "127.0.0.1";
           ROCKET_PORT = 8000;
 
           # Data
