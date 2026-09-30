@@ -53,7 +53,7 @@
             autoRegister = true;
             clientId = "immich";
             clientSecret._secret = secrets."kanidm/immich-basic-secret".path;
-            issuerUrl = "https://idm.narobin.com";
+            issuerUrl = "https://idm.narobin.com/oauth2/openid/immich";
             defaultStorageQuota = 30;
           };
           passwordLogin = {
