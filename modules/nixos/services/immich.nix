@@ -60,7 +60,7 @@
 
       services.tailscale.serve.services."capture" = lib.mkIf cfg.configureTailscale {
         endpoints = {
-          "tcp:443" = "https://${cfg.host}:${toString cfg.port}";
+          "tcp:443" = "http://${cfg.host}:${toString cfg.port}";
         };
         advertised = true;
       };
