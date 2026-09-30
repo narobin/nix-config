@@ -9,7 +9,7 @@
 
   mySystem.enableGui = false;
 
-  networking.hostName = "servitor.narobin.com";
+  networking.hostName = "servitor";
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "26.05";
 }
