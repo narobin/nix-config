@@ -78,6 +78,7 @@
 
           systems.oauth2."immich" = {
             displayName = "Immich";
+            originLanding = "https://${hostname}";
             originUrl = [
               "https://${hostname}/auth/login"
               "https://${hostname}/user-settings"
