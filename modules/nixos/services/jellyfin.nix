@@ -80,7 +80,7 @@
             RemainAfterExit = true;
             ExecStart = pkgs.writeShellScript "serve ${svc}" ''
               ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:8096
-              tailscale serve advertise svc:${svc}
+              ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
             '';
           };
         };
