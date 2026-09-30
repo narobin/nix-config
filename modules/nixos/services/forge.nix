@@ -72,8 +72,8 @@
         let
           svc = "forge";
           script = pkgs.writeShellScript "serve ${svc}" ''
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${srv.DOMAIN}:${toString srv.HTTP_PORT}
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://${srv.DOMAIN}:${toString srv.SSH_PORT}
+            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:${toString srv.HTTP_PORT}
+            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString srv.SSH_PORT}
             ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
           '';
         in
