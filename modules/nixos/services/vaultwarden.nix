@@ -21,7 +21,7 @@
   config =
     let
       cfg = config.services.vaultwarden;
-      hostname = "vaultwarden.aegean-penny.ts.net";
+      hostname = "vault.aegean-penny.ts.net";
       idmHostname = "idm.narobin.com";
     in
     lib.mkIf cfg.enable {
