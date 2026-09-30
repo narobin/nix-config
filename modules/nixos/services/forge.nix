@@ -110,6 +110,7 @@
 
         systems.oauth2."forgejo" = {
           displayName = "Forgejo";
+          preferShortUsername = true;
           originLanding = "https://${hostname}";
           originUrl = [
             "https://${hostname}/user/oauth2/Kanidm/callback"
