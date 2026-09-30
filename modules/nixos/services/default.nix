@@ -6,5 +6,6 @@
     ./tailscale.nix
     ./immich.nix
     ./forge.nix
+    ./vaultwarden.nix
   ];
 }

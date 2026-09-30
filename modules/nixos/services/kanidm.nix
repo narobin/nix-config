@@ -114,6 +114,7 @@
               "tailnet_users"
               "immich_users"
               "forgejo_users"
+              "vaultwarden_users"
             ];
           };
           "noah" = {
@@ -124,6 +125,7 @@
               "idm_people_on_boarding"
               "immich_admins"
               "forgejo_admins"
+              "vaultwarden_users"
             ];
           };
         };
