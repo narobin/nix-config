@@ -3,6 +3,7 @@
   services.openssh = {
     enable = true;
     openFirewall = true;
+    ports = [ 2222 ];
     hostKeys = [
       {
         type = "ed25519";
