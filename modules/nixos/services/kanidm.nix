@@ -110,7 +110,10 @@
           "cabine" = {
             displayName = "Zach Rice";
             mailAddresses = [ "cabine@narobin.com" ];
-            groups = [ "tailnet_users" ];
+            groups = [
+              "tailnet_users"
+              "immich_users"
+            ];
           };
           "noah" = {
             displayName = "Noah Robinson";
@@ -118,6 +121,7 @@
             groups = [
               "tailnet_users"
               "idm_people_on_boarding"
+              "immich_admins"
             ];
           };
         };
