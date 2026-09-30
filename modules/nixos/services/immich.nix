@@ -50,6 +50,7 @@
             clientId = "immich";
             clientSecret._secret = secrets."kanidm/immich-basic-secret".path;
             issuerUrl = "https://idm.narobin.com";
+            defaultStorageQuota = 30;
           };
           passwordLogin = {
             enabled = false;
@@ -94,6 +95,13 @@
               joinType = "csv";
               valuesByGroup = {
                 "immich_admins" = [ "admin" ];
+              };
+            };
+            claimMaps."immich_quota" = {
+              joinType = "csv";
+              valuesByGroup = {
+                "immich_admins" = 0;
+                "immich_users" = 100;
               };
             };
           };
