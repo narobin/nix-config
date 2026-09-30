@@ -6,5 +6,6 @@
     ./hardware
     ./security
     ./services
+    ./benchmarks
   ];
 }
