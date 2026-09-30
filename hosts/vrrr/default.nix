@@ -25,7 +25,7 @@
 
   services.tailscale = {
     enable = true;
-    serve.enable = true;
+    # serve.enable = true;
   };
 
   services.immich = {
