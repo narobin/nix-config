@@ -109,7 +109,7 @@
           displayName = "Forgejo";
           originLanding = "https://${hostname}";
           originUrl = [
-            "https://${hostname}/..."
+            "https://${hostname}/user/oauth2/Kanidm/callback"
           ];
           basicSecretFile = secrets."kanidm/forgejo-basic-secret".path;
           scopeMaps."forgejo_users" = [
