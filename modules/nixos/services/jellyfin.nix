@@ -51,12 +51,39 @@
         };
       };
 
-      services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
-        endpoints = {
-          "https:443" = "http://localhost:8096";
+      # services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
+      #   endpoints = {
+      #     "https:443" = "http://localhost:8096";
+      #   };
+      #   advertised = true;
+      # };
+
+      systemd.services.jellyfin-serve =
+        let
+          svc = "jellyfin";
+        in
+        {
+          description = "Jellyfin Serve Configuration";
+
+          after = [
+            "tailscaled.service"
+            "tailscaled-autoconnect.service"
+            "tailscaled-set.service"
+          ];
+          wants = [ "tailscaled.service" ];
+          wantedBy = [ "multi-user.target" ];
+
+          restartTriggers = [ cfg ];
+
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = pkgs.writeShellScript "serve ${svc}" ''
+              ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:8096
+              tailscale serve advertise svc:${svc}
+            '';
+          };
         };
-        advertised = true;
-      };
 
       # systemd.services.advertise-jellyfin = lib.mkIf config.services.tailscale.enable {
       #   description = "Advertise and enable TLS for svc:jellyfin";

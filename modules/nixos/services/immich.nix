@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   options.services.immich = {
     configureTailscale = lib.mkOption {
@@ -21,10 +26,8 @@
     lib.mkIf cfg.enable {
       assertions = [
         {
-          assertion =
-            cfg.configureTailscale
-            -> (config.services.tailscale.enable && config.services.tailscale.serve.enable);
-          message = "config.services.tailscale.enable and config.services.tailscale.serve.enable must be true when config.services.immich.configureTailscale is true.";
+          assertion = cfg.configureTailscale -> config.services.tailscale.enable;
+          message = "config.services.tailscale.enable must be true when config.services.immich.configureTailscale is true.";
         }
         {
           assertion =
@@ -58,12 +61,39 @@
         };
       };
 
-      services.tailscale.serve.services."capture" = lib.mkIf cfg.configureTailscale {
-        endpoints = {
-          "https:443" = "http://${cfg.host}:${toString cfg.port}";
+      # services.tailscale.serve.services."capture" = lib.mkIf cfg.configureTailscale {
+      #   endpoints = {
+      #     "https:443" = "http://${cfg.host}:${toString cfg.port}";
+      #   };
+      #   advertised = true;
+      # };
+
+      systemd.services.immich-serve =
+        let
+          svc = "capture";
+        in
+        {
+          description = "Immich Serve Configuration";
+
+          after = [
+            "tailscaled.service"
+            "tailscaled-autoconnect.service"
+            "tailscaled-set.service"
+          ];
+          wants = [ "tailscaled.service" ];
+          wantedBy = [ "multi-user.target" ];
+
+          restartTriggers = [ cfg ];
+
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = pkgs.writeShellScript "serve ${svc}" ''
+              ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${cfg.host}:${toString cfg.port}
+              tailscale serve advertise svc:${svc}
+            '';
+          };
         };
-        advertised = true;
-      };
 
       services.kanidm.provision =
         let
