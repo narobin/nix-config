@@ -64,14 +64,15 @@
 
           # Data
           TRASH_AUTO_DELETE_DAYS = 30;
-        }
-        // lib.mkIf cfg.configureKanidm {
+
           # Auth
           SSO_ENABLED = true;
           SSO_ONLY = true;
           SSO_AUTHORITY = "https://${idmHostname}/oauth2/openid/vaultwarden";
           SSO_CLIENT_ID = "vaultwarden";
         };
+        # // lib.mkIf cfg.configureKanidm {
+        # };
         environmentFile = config.sops.templates."vaultwarden.env".path;
       };
 
