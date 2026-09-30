@@ -48,6 +48,7 @@
         group = "kanidm";
         settings = {
           oauth = {
+            enabled = true;
             autoLaunch = true;
             autoRegister = true;
             clientId = "immich";
@@ -71,6 +72,10 @@
       systemd.services.immich-serve =
         let
           svc = "capture";
+          script = pkgs.writeShellScript "serve ${svc}" ''
+            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${cfg.host}:${toString cfg.port}
+            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
+          '';
         in
         {
           description = "Immich Serve Configuration";
@@ -83,15 +88,12 @@
           wants = [ "tailscaled.service" ];
           wantedBy = [ "multi-user.target" ];
 
-          # restartTriggers = [ cfg ];
+          restartTriggers = [ script ];
 
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
-            ExecStart = pkgs.writeShellScript "serve ${svc}" ''
-              ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${cfg.host}:${toString cfg.port}
-              ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-            '';
+            ExecStart = script;
           };
         };
 

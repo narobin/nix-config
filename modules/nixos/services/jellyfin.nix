@@ -61,6 +61,10 @@
       systemd.services.jellyfin-serve =
         let
           svc = "jellyfin";
+          script = pkgs.writeShellScript "serve ${svc}" ''
+            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:8096
+            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
+          '';
         in
         {
           description = "Jellyfin Serve Configuration";
@@ -73,15 +77,12 @@
           wants = [ "tailscaled.service" ];
           wantedBy = [ "multi-user.target" ];
 
-          # restartTriggers = [ cfg ];
+          restartTriggers = [ script ];
 
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
-            ExecStart = pkgs.writeShellScript "serve ${svc}" ''
-              ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:8096
-              ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-            '';
+            ExecStart = script;
           };
         };
 
