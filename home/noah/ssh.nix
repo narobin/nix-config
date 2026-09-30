@@ -21,6 +21,10 @@ in
         IdentitiesOnly = "yes";
       };
 
+      "vrrr.aegean-penny.ts.net" = lib.hm.dag.entryBefore [ "*" ] {
+        Port = 2222;
+      };
+
       "*" = {
         IdentityAgent = onePasswordPath;
         IdentitiesOnly = "yes";
