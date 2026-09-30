@@ -80,7 +80,7 @@
             ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
           '';
         in
-        {
+        lib.mkIf cfg.configureTailscale {
           description = "Forgejo Serve Configuration";
 
           after = [
