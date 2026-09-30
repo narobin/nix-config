@@ -25,7 +25,13 @@
 
   services.tailscale = {
     enable = true;
-    # serve.enable = true;
+    serve.enable = true;
+  };
+
+  services.immich = {
+    enable = true;
+    configureKanidm = true;
+    configureTailscale = true;
   };
 
   networking.hostName = "vrrr";

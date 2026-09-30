@@ -21,8 +21,10 @@
     lib.mkIf cfg.enable {
       assertions = [
         {
-          assertion = cfg.configureTailscale -> config.services.tailscale.enable;
-          message = "config.services.tailscale.enable must be true when config.services.immich.configureTailscale is true.";
+          assertion =
+            cfg.configureTailscale
+            -> (config.services.tailscale.enable && config.services.tailscale.serve.enable);
+          message = "config.services.tailscale.enable and config.services.tailscale.serve.enable must be true when config.services.immich.configureTailscale is true.";
         }
         {
           assertion =
@@ -57,7 +59,7 @@
 
       services.tailscale.serve.services."capture" = lib.mkIf cfg.configureTailscale {
         endpoints = {
-          "tcp:443" = "https://${cfg.host}:${cfg.port}";
+          "tcp:443" = "https://${cfg.host}:${toString cfg.port}";
         };
         advertised = true;
       };
@@ -81,7 +83,7 @@
               "https://${hostname}/user-settings"
               "app.immich://oauth-callback"
             ];
-            basicSecretFile = secrets."kanidm/config-basic-secret".path;
+            basicSecretFile = secrets."kanidm/immich-basic-secret".path;
             scopeMaps."immich_users" = [
               "openid"
               "email"
@@ -90,7 +92,7 @@
             claimMaps."immich_role" = {
               joinType = "csv";
               valuesByGroup = {
-                "immich_admins" = "admin";
+                "immich_admins" = [ "admin" ];
               };
             };
           };
