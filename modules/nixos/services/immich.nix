@@ -56,6 +56,8 @@
             issuerUrl = "https://idm.narobin.com/oauth2/openid/immich";
             signingAlgorithm = "ES256";
             defaultStorageQuota = 30;
+            storageQuotaClaim = "immich_quota";
+            roleClaim = "immich_role";
           };
           passwordLogin = {
             enabled = false;
