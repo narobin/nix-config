@@ -100,8 +100,8 @@
             claimMaps."immich_quota" = {
               joinType = "csv";
               valuesByGroup = {
-                "immich_admins" = 0;
-                "immich_users" = 100;
+                "immich_admins" = [ "0" ];
+                "immich_users" = [ "100" ];
               };
             };
           };
