@@ -113,6 +113,7 @@
             groups = [
               "tailnet_users"
               "immich_users"
+              "forgejo_users"
             ];
           };
           "noah" = {
