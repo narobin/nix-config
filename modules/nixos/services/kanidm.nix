@@ -122,6 +122,7 @@
               "tailnet_users"
               "idm_people_on_boarding"
               "immich_admins"
+              "forgejo_admins"
             ];
           };
         };
