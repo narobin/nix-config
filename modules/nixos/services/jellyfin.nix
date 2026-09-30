@@ -73,7 +73,7 @@
           wants = [ "tailscaled.service" ];
           wantedBy = [ "multi-user.target" ];
 
-          restartTriggers = [ cfg ];
+          # restartTriggers = [ cfg ];
 
           serviceConfig = {
             Type = "oneshot";
