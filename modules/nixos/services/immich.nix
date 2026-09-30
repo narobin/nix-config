@@ -118,7 +118,7 @@
             originUrl = [
               "https://${hostname}/auth/login"
               "https://${hostname}/user-settings"
-              "app.immich://oauth-callback"
+              "app.immich:///oauth-callback"
             ];
             basicSecretFile = secrets."kanidm/immich-basic-secret".path;
             scopeMaps."immich_users" = [
