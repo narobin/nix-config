@@ -54,6 +54,7 @@
             clientId = "immich";
             clientSecret._secret = secrets."kanidm/immich-basic-secret".path;
             issuerUrl = "https://idm.narobin.com/oauth2/openid/immich";
+            signingAlgorithm = "ES256";
             defaultStorageQuota = 30;
           };
           passwordLogin = {
