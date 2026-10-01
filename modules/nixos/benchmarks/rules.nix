@@ -100,7 +100,7 @@
         map
           (rule: {
             assertion = rule.assertion;
-            description = "CIS Benchmarks Rule ${rule.rule} requires: ${rule.name}";
+            message = "CIS Benchmarks Rule ${rule.rule} requires: ${rule.name}";
           })
           (
             builtins.filter (
