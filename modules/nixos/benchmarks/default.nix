@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./rules.nix
     ./1-setup
     # ./2-service
     # ./3-network
