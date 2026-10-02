@@ -12,6 +12,7 @@
       "logi-options+"
       "zen"
       "onyx"
+      "onedrive"
     ];
 
     masApps = {
