@@ -49,6 +49,8 @@
         };
       };
 
+      systemd.services.sunshine;
+
       # networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
       #   allowedTCPPorts = [
       #     47989
