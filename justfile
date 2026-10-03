@@ -1,5 +1,5 @@
 check:
-    nix flake check --all-systems --keep-going
+    nix flake check --all-systems
 
 update:
     nix flake update
