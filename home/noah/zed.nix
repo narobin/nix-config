@@ -6,6 +6,8 @@
       "html"
       "nix"
       "kdl"
+      "toml"
+      "typst"
     ];
 
     mutableUserSettings = false;
