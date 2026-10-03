@@ -8,14 +8,6 @@
     ./system.nix
   ];
 
-  benchmarks = {
-    enable = true;
-    system = {
-      type = "workstation";
-      level = 1;
-    };
-  };
-
   mySystem = {
     enableGui = true;
     enableWireless = true;
