@@ -27,7 +27,7 @@
         && !(builtins.elem module config.boot.kernelModules);
       fileMountExists = mount: config.fileSystems ? mount;
       fileMountHasOption =
-        option: (mount: afileMountExists mount -> builtins.elem option config.fileSystems.${mount});
+        option: (mount: fileMountExists mount -> builtins.elem option config.fileSystems.${mount});
       systemdMountExists =
         mountLocation: lib.any (mount: mount.where == mountLocation) config.systemd.mounts;
       systemdMountHasOption =
