@@ -46,7 +46,7 @@
     configureTailscale = true;
   };
 
-  services.sunshine.enable = true;
+  # services.sunshine.enable = true;
 
   networking.hostName = "vrrr";
   nixpkgs.hostPlatform = "x86_64-linux";
