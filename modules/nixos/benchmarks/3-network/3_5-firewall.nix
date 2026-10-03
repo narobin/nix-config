@@ -20,7 +20,7 @@
       # note this is an anti-spoofing measure but doesn't fully block it
       rule = "3.5.1.2";
       name = "loopback traffic is configured";
-      assertion = config.networking.firewall.checkReversePath;
+      assertion = config.networking.firewall.checkReversePath == true;
     }
     # 3.5.1.3 outbound and established connections are configured
     # 3.5.1.4 firewall rules exist for all open ports
