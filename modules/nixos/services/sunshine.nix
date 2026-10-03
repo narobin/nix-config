@@ -42,5 +42,17 @@
         };
       };
       # TODO: allow access from tailnet only
+      # tailscale0
+      networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+        allowedTCPPorts = [
+          47989
+          47984
+        ];
+        allowedUDPPorts = [
+          47998
+          47999
+          47800
+        ];
+      };
     };
 }
