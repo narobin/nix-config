@@ -15,14 +15,19 @@ in
     enableDefaultConfig = false;
 
     settings = {
-      "github.com" = lib.hm.dag.entryBefore [ "*" ] {
+      "github.com" = lib.hm.dag.entryBefore [ "!*.* *" ] {
         User = "git";
+        IdentityAgent = onePasswordPath;
         IdentityFile = "~/.ssh/github.pub";
         IdentitiesOnly = "yes";
       };
 
-      "vrrr.aegean-penny.ts.net" = lib.hm.dag.entryBefore [ "*" ] {
+      "!*.* *" = lib.hm.dag.entryBefore [ "*" ] {
+        Hostname = "%h.aegean-penny.ts.net";
         Port = 2222;
+        IdentityAgent = onePasswordPath;
+        IdentitiesOnly = "yes";
+        IdentityFile = "~/.ssh/remote-access.pub";
       };
 
       "*" = {
