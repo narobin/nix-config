@@ -7,5 +7,6 @@
     ./immich.nix
     ./forge.nix
     ./vaultwarden.nix
+    ./sunshine.nix
   ];
 }
