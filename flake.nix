@@ -57,6 +57,7 @@
             ({ ... }: {
               determinateNix.enable = true;
             })
+            ./lib
             module
           ];
         };
@@ -81,6 +82,7 @@
               ];
             }
             sops-nix.nixosModules.sops
+            ./lib
             module
           ];
         };
