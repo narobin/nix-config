@@ -30,6 +30,10 @@
         '';
       };
 
+      services.udev.extraRules = ''
+        KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
+      '';
+
       services.sunshine = {
         settings = {
           sunshine_name = "Imperator Somnium";
