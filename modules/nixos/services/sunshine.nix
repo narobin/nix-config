@@ -35,7 +35,7 @@
       '';
 
       services.sunshine = {
-        # openFirewall = true;
+        openFirewall = true;
         settings = {
           sunshine_name = "Imperator Somnium";
           global_prep_cmd = ''
@@ -49,16 +49,16 @@
         };
       };
 
-      networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-        allowedTCPPorts = [
-          47989
-          47984
-        ];
-        allowedUDPPorts = [
-          47998
-          47999
-          47800
-        ];
-      };
+      # networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+      #   allowedTCPPorts = [
+      #     47989
+      #     47984
+      #   ];
+      #   allowedUDPPorts = [
+      #     47998
+      #     47999
+      #     47800
+      #   ];
+      # };
     };
 }
