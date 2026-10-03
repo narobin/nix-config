@@ -109,7 +109,7 @@
         persons = {
           "cabine" = {
             displayName = "Zach Rice";
-            mailAddresses = [ "cabine@narobin.com" ];
+            mailAddresses = [ "zacharydavidrice@gmail.com" ];
             groups = [
               "tailnet_users"
               "immich_users"
