@@ -13,6 +13,7 @@
       "zen"
       "onyx"
       "onedrive"
+      "moonlight"
     ];
 
     masApps = {
