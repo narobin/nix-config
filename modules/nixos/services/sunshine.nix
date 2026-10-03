@@ -38,12 +38,14 @@
         # openFirewall = true;
         settings = {
           sunshine_name = "Imperator Somnium";
-          global_prep_cmd = [
-            {
-              do = "sh -c 'swaymsg \"output HEADLESS-1 mode \${SUNSHINE_CLIENT_WIDTH}x\${SUNSHINE_CLIENT_HEIGHT}@\${SUNSHINE_CLIENT_FPS}Hz\"'";
-              undo = "sh -c 'swaymsg \"output HEADLESS-1 mode 1920x1080@60Hz\"'";
-            }
-          ];
+          global_prep_cmd = ''
+            [
+              {
+                do = "sh -c 'swaymsg "output HEADLESS-1 mode ''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz"'";
+                undo = "sh -c 'swaymsg "output HEADLESS-1 mode 1920x1080@60Hz"'";
+              }
+            ]
+          '';
         };
       };
 
