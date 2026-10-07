@@ -8,6 +8,7 @@
       "kdl"
       "toml"
       "typst"
+      "astro"
     ];
 
     mutableUserSettings = false;
