@@ -13,11 +13,11 @@
           lib.types.submodule {
             options = {
               https = lib.mkOption {
-                type = lib.types.int;
+                type = lib.types.nullOr lib.types.int;
                 default = null;
               };
               tcp = lib.mkOption {
-                type = lib.types.int;
+                type = lib.types.nullOr lib.types.int;
                 default = null;
               };
             };
