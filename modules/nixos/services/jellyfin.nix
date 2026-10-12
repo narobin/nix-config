@@ -15,7 +15,7 @@
 
     hardwareAcceleration.enable = lib.mkEnableOption "jellyfin hardware acceleration";
 
-    tailscale.enable = lib.mkEnableOption "tailscale-jellyfin-serve";
+    configureTailscale = lib.mkEnableOption "tailscale-jellyfin-serve";
   };
 
   config =
@@ -29,7 +29,9 @@
           message = "mySystem.renderDevice must be set when hardware acceleration is true";
         }
         {
-          assertion = cfg.tailscale.enable -> config.services.tailscale.enable == true;
+          assertion =
+            cfg.configureTailscale
+            -> config.services.tailscale.enable && config.services.tailscale.butler.enable;
           message = "services.tailscale.enable must be true when jellyfin.tailscale.enable is true";
         }
         # {
@@ -51,69 +53,9 @@
         };
       };
 
-      # services.tailscale.serve.services."jellyfin" = lib.mkIf config.services.tailscale.enable {
-      #   endpoints = {
-      #     "https:443" = "http://localhost:8096";
-      #   };
-      #   advertised = true;
-      # };
-
-      systemd.services.jellyfin-serve =
-        let
-          svc = "jellyfin";
-          script = pkgs.writeShellScript "serve ${svc}" ''
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:8096
-            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-          '';
-        in
-        {
-          description = "Jellyfin Serve Configuration";
-
-          after = [
-            "tailscaled.service"
-            "tailscaled-autoconnect.service"
-            "tailscaled-set.service"
-          ];
-          wants = [ "tailscaled.service" ];
-          wantedBy = [ "multi-user.target" ];
-
-          restartTriggers = [ script ];
-
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            ExecStart = script;
-          };
-        };
-
-      # systemd.services.advertise-jellyfin = lib.mkIf config.services.tailscale.enable {
-      #   description = "Advertise and enable TLS for svc:jellyfin";
-      #   after = [
-      #     "tailscaled.service"
-      #     "network-online.target"
-      #   ];
-      #   wants = [ "network-online.target" ];
-      #   bindsTo = [ "tailscaled.service" ];
-      #   wantedBy = [ "multi-user.target" ];
-      #   path = [ pkgs.tailscale ];
-      #   serviceConfig = {
-      #     Type = "oneshot";
-      #     RemainAfterExit = true;
-      #     ExecStartPre = pkgs.writeShellScript "wait-for-tailscaled" ''
-      #       for i in $(seq 1 30); do
-      #         tailscale status --peers=false >/dev/null 2>&1 && exit 0
-      #         sleep 1
-      #       done
-      #       echo "tailscaled not ready after 30s" >&2
-      #       exit 1
-      #     '';
-      #     ExecStart = pkgs.writeShellScript "advertise-jellyfin" ''
-      #       set -e
-      #       tailscale serve --yes --service=svc:jellyfin --https=443 http://localhost:8096
-      #       tailscale serve advertise svc:jellyfin
-      #     '';
-      #   };
-      # };
+      services.tailscale.butler.services.jellyfin = lib.mkIf cfg.configureTailscale {
+        https = 8096;
+      };
 
     };
 }

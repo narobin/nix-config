@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -76,33 +75,9 @@
         environmentFile = config.sops.templates."vaultwarden.env".path;
       };
 
-      systemd.services.vaultwarden-serve =
-        let
-          svc = "vault";
-          script = pkgs.writeShellScript "serve ${svc}" ''
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${cfg.config.ROCKET_ADDRESS}:${toString cfg.config.ROCKET_PORT}
-            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-          '';
-        in
-        lib.mkIf cfg.configureTailscale {
-          description = "Vault Serve Configuration";
-
-          after = [
-            "tailscaled.service"
-            "tailscaled-autoconnect.service"
-            "tailscaled-set.service"
-          ];
-          wants = [ "tailscaled.service" ];
-          wantedBy = [ "multi-user.target" ];
-
-          restartTriggers = [ script ];
-
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            ExecStart = script;
-          };
-        };
+      services.tailscale.butler.services.vault = lib.mkIf cfg.configureTailscale {
+        https = cfg.config.ROCKET_PORT;
+      };
 
       services.kanidm.provision = lib.mkIf cfg.configureKanidm {
         groups = {
