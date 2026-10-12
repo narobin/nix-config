@@ -53,17 +53,19 @@
       systemd.services.tailscale-butler =
         let
           script = pkgs.writeShellScript "Butler" (
-            lib.flatten (
-              lib.mapAttrsToList (
-                svc: value:
-                (lib.optional (value.https != null)
-                  "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:${toString value.https}"
-                )
-                ++ (lib.optional (value.tcp != null)
-                  "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString value.tcp}"
-                )
-                ++ "${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}"
-              ) cfg.butler.services
+            lib.concatStringsSep "\n" (
+              lib.flatten (
+                lib.mapAttrsToList (
+                  svc: value:
+                  (lib.optional (value.https != null)
+                    "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:${toString value.https}"
+                  )
+                  ++ (lib.optional (value.tcp != null)
+                    "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString value.tcp}"
+                  )
+                  ++ "${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}"
+                ) cfg.butler.services
+              )
             )
           );
         in
