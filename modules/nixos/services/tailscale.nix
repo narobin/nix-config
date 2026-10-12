@@ -63,7 +63,7 @@
                   ++ (lib.optional (value.tcp != null)
                     "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString value.tcp}"
                   )
-                  ++ "${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}"
+                  ++ [ "${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}" ]
                 ) cfg.butler.services
               )
             )
