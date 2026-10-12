@@ -25,7 +25,7 @@
           blocking = {
             denylists = {
               ads = [
-                "https://big.oisd.nl/domainswild"
+                "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro-onlydomains.txt"
               ];
             };
             clientGroupsBlock = {
