@@ -11,7 +11,6 @@
   mySystem.enableGui = true;
 
   homebrew.casks = [
-    "citrix-workspace"
   ];
 
   services.tailscale.enable = true;

@@ -14,7 +14,6 @@
       ripgrep
       uutils-coreutils-noprefix
       xh
-      cloudflare-warp
       rustc
       cargo
       moor
