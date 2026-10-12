@@ -71,34 +71,10 @@
 
       services.forgejo-runner = { };
 
-      systemd.services.forgejo-serve =
-        let
-          svc = "forge";
-          script = pkgs.writeShellScript "serve ${svc}" ''
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:${toString srv.HTTP_PORT}
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString srv.SSH_PORT}
-            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-          '';
-        in
-        lib.mkIf cfg.configureTailscale {
-          description = "Forgejo Serve Configuration";
-
-          after = [
-            "tailscaled.service"
-            "tailscaled-autoconnect.service"
-            "tailscaled-set.service"
-          ];
-          wants = [ "tailscaled.service" ];
-          wantedBy = [ "multi-user.target" ];
-
-          restartTriggers = [ script ];
-
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            ExecStart = script;
-          };
-        };
+      services.tailscale.butler.services.forge = lib.mkIf cfg.configureTailscale {
+        https = srv.HTTP_PORT;
+        tcp = srv.SSH_PORT;
+      };
 
       services.kanidm.provision = lib.mkIf cfg.configureKanidm {
         groups = {

@@ -1,6 +1,30 @@
-{ config, lib, ... }:
 {
-  options = { };
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.services.tailscale = {
+    butler = {
+      enable = lib.mkEnableOption "Whether to enable the Butler service";
+      services = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              https = lib.mkOption {
+                type = lib.types.int;
+              };
+              tcp = lib.mkOption {
+                type = lib.types.int;
+              };
+            };
+          }
+        );
+        default = { };
+      };
+    };
+  };
 
   config =
     let
@@ -23,5 +47,41 @@
       services.tailscale = {
         authKeyFile = config.sops.secrets."vrrr/tailscale-key".path;
       };
+
+      systemd.services.tailscale-butler =
+        let
+          script = pkgs.writeShellScript "Butler" (
+            lib.flatten (
+              lib.mapAttrsToList (
+                svc: value:
+                (lib.optional (value.https != null)
+                  "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://localhost:${toString value.https}"
+                )
+                ++ (lib.optional (value.tcp != null)
+                  "${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --tcp=22 tcp://localhost:${toString value.tcp}"
+                )
+                ++ "${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}"
+              ) cfg.butler.services
+            )
+          );
+        in
+        lib.mkIf cfg.butler.enable {
+          description = "Tailscale Butler";
+          after = [
+            "tailscaled.service"
+            "tailscaled-autoconnect.service"
+            "tailscaled-set.service"
+          ];
+          wants = [ "tailscaled.service" ];
+          wantedBy = [ "multi-user.target" ];
+
+          restartTriggers = [ script ];
+
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = script;
+          };
+        };
     };
 }

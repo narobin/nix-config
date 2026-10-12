@@ -65,40 +65,9 @@
         };
       };
 
-      # services.tailscale.serve.services."capture" = lib.mkIf cfg.configureTailscale {
-      #   endpoints = {
-      #     "https:443" = "http://${cfg.host}:${toString cfg.port}";
-      #   };
-      #   advertised = true;
-      # };
-
-      systemd.services.immich-serve =
-        let
-          svc = "capture";
-          script = pkgs.writeShellScript "serve ${svc}" ''
-            ${lib.getExe config.services.tailscale.package} serve --yes --service=svc:${svc} --https=443 http://${cfg.host}:${toString cfg.port}
-            ${lib.getExe config.services.tailscale.package} serve advertise svc:${svc}
-          '';
-        in
-        {
-          description = "Immich Serve Configuration";
-
-          after = [
-            "tailscaled.service"
-            "tailscaled-autoconnect.service"
-            "tailscaled-set.service"
-          ];
-          wants = [ "tailscaled.service" ];
-          wantedBy = [ "multi-user.target" ];
-
-          restartTriggers = [ script ];
-
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            ExecStart = script;
-          };
-        };
+      services.tailscale.butler.services.capture = lib.mkIf cfg.configureTailscale {
+        https = cfg.port;
+      };
 
       services.kanidm.provision =
         let

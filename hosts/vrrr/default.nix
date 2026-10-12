@@ -16,7 +16,7 @@
 
   jellyfin = {
     enable = true;
-    tailscale.enable = true;
+    configureTailscale = true;
   };
 
   services.cloudflared.enable = true;
@@ -26,6 +26,7 @@
   services.tailscale = {
     enable = true;
     # serve.enable = true;
+    butler.enable = true;
   };
 
   services.immich = {
