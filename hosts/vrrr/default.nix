@@ -46,6 +46,8 @@
     configureTailscale = true;
   };
 
+  services.blocky.enable = true;
+
   # services.sunshine.enable = true;
 
   networking.hostName = "vrrr";
