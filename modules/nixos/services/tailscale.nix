@@ -14,9 +14,11 @@
             options = {
               https = lib.mkOption {
                 type = lib.types.int;
+                default = null;
               };
               tcp = lib.mkOption {
                 type = lib.types.int;
+                default = null;
               };
             };
           }
