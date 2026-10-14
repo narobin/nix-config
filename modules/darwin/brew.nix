@@ -3,7 +3,10 @@
   homebrew = {
     enable = true;
 
-    brews = [ "mas" ];
+    brews = [ 
+      "mas"
+      "mole"
+    ];
 
     casks = [
       "orion"
@@ -11,7 +14,6 @@
       "ungoogled-chromium"
       "logi-options+"
       "zen"
-      "onyx"
       "onedrive"
       "moonlight"
     ];
