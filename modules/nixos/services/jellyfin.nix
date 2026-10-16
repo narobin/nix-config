@@ -48,7 +48,7 @@
 
         hardwareAcceleration = {
           enable = cfg.hardwareAcceleration.enable;
-
+          type = "nvenc";
           device = config.mySystem.renderDevice;
         };
       };
