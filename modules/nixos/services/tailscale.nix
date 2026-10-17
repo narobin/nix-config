@@ -48,6 +48,7 @@
 
       services.tailscale = {
         authKeyFile = config.sops.secrets."vrrr/tailscale-key".path;
+        port = 30002;
       };
 
       systemd.services.tailscale-butler =
