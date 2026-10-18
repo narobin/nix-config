@@ -16,7 +16,10 @@ in
     shell = pkgs.zsh;
   }
   // lib.optionalAttrs (!isDarwin) {
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
     isNormalUser = true;
     uid = 1000;
     openssh.authorizedKeys.keyFiles = [
@@ -45,6 +48,7 @@ in
       ./direnv.nix
       ./niri.nix
       ./zellij.nix
+      ./discord.nix
     ];
   };
 }
