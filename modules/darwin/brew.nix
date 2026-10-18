@@ -3,13 +3,12 @@
   homebrew = {
     enable = true;
 
-    brews = [ 
+    brews = [
       "mas"
       "mole"
     ];
 
     casks = [
-      "orion"
       "affinity"
       "ungoogled-chromium"
       "logi-options+"
