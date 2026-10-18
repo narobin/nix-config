@@ -24,6 +24,7 @@
       "Mela" = 1568924476;
       "Wireguard" = 1451685025;
       "Numbers" = 361304891;
+      "PowerPoint" = 462062816;
     };
 
     onActivation = {
