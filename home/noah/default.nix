@@ -48,7 +48,6 @@ in
       ./direnv.nix
       ./niri.nix
       ./zellij.nix
-      ./discord.nix
     ];
   };
 }

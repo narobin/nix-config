@@ -15,6 +15,7 @@
       "zen"
       "onedrive"
       "moonlight"
+      "discord"
     ];
 
     masApps = {
