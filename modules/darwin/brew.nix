@@ -24,6 +24,8 @@
       "Mela" = 1568924476;
       "Numbers" = 361304891;
       "PowerPoint" = 462062816;
+      "Excel" = 462058435;
+      "Word" = 462054704;
     };
 
     onActivation = {
