@@ -55,7 +55,7 @@
         let
           script = pkgs.writeShellScript "Butler" (
             lib.concatStringsSep "\n" (
-              "${lib.getExe config.services.tailscale.package} serve reset"
+              [ "${lib.getExe config.services.tailscale.package} serve reset" ]
               ++ lib.flatten (
                 lib.mapAttrsToList (
                   svc: value:
