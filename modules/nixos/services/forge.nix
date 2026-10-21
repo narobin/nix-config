@@ -56,6 +56,10 @@
             ROOT_URL = "https://${srv.DOMAIN}/";
             HTTP_PORT = 3000;
             SSH_PORT = 22;
+            START_SSH_SERVER = true;
+          };
+          repository = {
+            DISABLE_HTTP_GIT = true;
           };
           service = {
             DISABLE_REGISTRATION = true;
