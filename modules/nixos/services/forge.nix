@@ -55,8 +55,8 @@
             DOMAIN = hostname;
             ROOT_URL = "https://${srv.DOMAIN}/";
             HTTP_PORT = 3000;
-            SSH_PORT = 22;
-            START_SSH_SERVER = true;
+            SSH_PORT = lib.head config.services.openssh.ports;
+            START_SSH_SERVER = false;
           };
           repository = {
             DISABLE_HTTP_GIT = true;
@@ -73,10 +73,7 @@
         };
       };
 
-      systemd.services.forgejo.serviceConfig = {
-        AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-        CapabilityBoundingSet = lib.mkForce "CAP_NET_BIND_SERVICE";
-      };
+      services.openssh.settings.AllowUsers = [ cfg.user ];
 
       services.forgejo-runner = { };
 
