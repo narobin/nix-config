@@ -75,7 +75,7 @@
 
       systemd.services.forgejo.serviceConfig = {
         AmbientCapabilities = "CAP_NET_BIND_SERVICE";
-        CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
+        CapabilityBoundingSet = lib.mkForce "CAP_NET_BIND_SERVICE";
       };
 
       services.forgejo-runner = { };
