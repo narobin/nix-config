@@ -28,6 +28,7 @@
     enable = true;
     # serve.enable = true;
     butler.enable = true;
+    domainRoot = ".aegean-penny.ts.net";
   };
 
   services.immich = {
