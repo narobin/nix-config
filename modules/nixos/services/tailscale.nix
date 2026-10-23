@@ -6,6 +6,11 @@
 }:
 {
   options.services.tailscale = {
+    domainRoot = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = ".aegean-penny.ts.net";
+    };
     butler = {
       enable = lib.mkEnableOption "Whether to enable the Butler service";
       services = lib.mkOption {
@@ -33,6 +38,13 @@
       cfg = config.services.tailscale;
     in
     lib.mkIf cfg.enable {
+      assertions = [
+        {
+          assertion = cfg.domainRoot != null;
+          message = "Tailscale domain root must be specified when Tailscale is enabled";
+        }
+      ];
+
       sops.secrets."vrrr/tailscale-key" = {
         sopsFile = ../../../secrets/vrrr.yaml;
       };
