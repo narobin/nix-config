@@ -9,5 +9,6 @@
     ./vaultwarden.nix
     ./sunshine.nix
     ./blocky.nix
+    ./miniflux.nix
   ];
 }
