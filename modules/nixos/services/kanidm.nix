@@ -115,6 +115,7 @@
               "immich_users"
               "forgejo_users"
               "vaultwarden_users"
+              "miniflux_users"
             ];
           };
           "noah" = {
@@ -126,6 +127,7 @@
               "immich_admins"
               "forgejo_admins"
               "vaultwarden_users"
+              "miniflux_users"
             ];
           };
         };
