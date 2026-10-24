@@ -36,6 +36,7 @@
           }
 
           (lib.mkIf cfg.configureKanidm {
+            DISABLE_LOCAL_AUTH = 1;
             OAUTH2_PROVIDER = "oidc";
             OAUTH2_CLIENT_ID = "miniflux";
             OAUTH2_REDIRECT_URL = "https://${cfg.hostname}/oauth2/oidc/callback";
@@ -45,8 +46,6 @@
         ];
         adminCredentialsFile = config.sops.templates."miniflux.env".path;
       };
-
-      # systemd.services.miniflux.serviceConfig.Group = "kanidm";
 
       sops = {
         secrets = {
@@ -59,9 +58,6 @@
         };
 
         templates."miniflux.env" = {
-          # owner = "miniflux";
-          # group = "miniflux";
-
           content = ''
             ADMIN_USERNAME=${config.sops.placeholder."miniflux/admin-username"}
             ADMIN_PASSWORD=${config.sops.placeholder."miniflux/admin-password"}
