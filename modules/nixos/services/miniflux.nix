@@ -59,8 +59,8 @@
         };
 
         templates."miniflux.env" = {
-          owner = "miniflux";
-          group = "miniflux";
+          # owner = "miniflux";
+          # group = "miniflux";
 
           content = ''
             ADMIN_USERNAME=${config.sops.placeholder."miniflux/admin-username"}
