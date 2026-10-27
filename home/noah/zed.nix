@@ -26,6 +26,12 @@
       project_panel = {
         dock = "left";
       };
+      ssh_connections = [
+        {
+          host = "vrrr";
+          nickname = "vrrr";
+        }
+      ];
       disable_ai = true;
       base_keymap = "VSCode";
       vim_mode = true;
