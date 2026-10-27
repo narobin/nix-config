@@ -7,5 +7,6 @@
     ./packages.nix
     ./settings.nix
     ./shell.nix
+    ./ssh.nix
   ];
 }
