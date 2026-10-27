@@ -9,6 +9,11 @@
     Host *.aegean-penny.ts.net
       ForwardAgent yes
       Port 2222
+
+    Host *
+      ControlMaster auto
+      ControlPath ~/.ssh/cm-%C
+      ControlPersist 10m
   '';
 }
 
