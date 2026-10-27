@@ -39,6 +39,9 @@
           system = "aarch64-darwin";
           specialArgs = { inherit inputs; };
           modules = [
+            ({ config, pkgs, ... }: {
+              nixpkgs.overlays = [ self.overlays.default ];
+            })
             determinate.darwinModules.default
             home-manager.darwinModules.home-manager
             {
@@ -86,6 +89,18 @@
         };
     in
     {
+      overlays.default = final: prev: {
+        tikv = final.callPackage ./derivations/tikv { };
+      };
+
+      packages.aarch64-darwin.tikv =
+        nixpkgs.legacyPackages.aarch64-darwin.callPackage ./derivations/tikv
+          { };
+
+      packages.x86_64-linux.tikv =
+        nixpkgs.legacyPackages.x86_64-linux.callPackage ./derivations/tikv
+          { };
+
       nixosConfigurations = {
         # servitor = mkHost ./hosts/servitor;
         vrrr = mkHost ./hosts/vrrr;
