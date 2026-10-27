@@ -1,11 +1,4 @@
 { pkgs, lib, ... }:
-let
-  onePasswordPath =
-    if pkgs.stdenv.hostPlatform.isDarwin then
-      "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\""
-    else
-      "~/.1password/agent.sock";
-in
 {
   home.file.".ssh/github.pub".source = ./resources/github.pub;
   home.file.".ssh/remote-access.pub".source = ./resources/remote-access.pub;
@@ -17,9 +10,7 @@ in
     settings = {
       "github.com" = lib.hm.dag.entryBefore [ "*.aegean-penny.ts.net" ] {
         User = "git";
-        #IdentityAgent = onePasswordPath;
         IdentityFile = "~/.ssh/github.pub";
-        IdentitiesOnly = "yes";
       };
 
       "*.aegean-penny.ts.net" = lib.hm.dag.entryBefore [ "*" ] {
@@ -28,7 +19,9 @@ in
       };
 
       "*" = {
-        IdentityAgent = onePasswordPath;
+        IdentityAgent = "$SSH_1P_SOCK";
+        IdentitiesOnly = "yes";
+        IdentityFile = "~/.ssh/remote-access.pub";
 
         ServerAliveInterval = 60;
         ServerAliveCountMax = 3;
