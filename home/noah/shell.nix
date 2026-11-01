@@ -7,9 +7,9 @@
 let
   onePasswordPath =
     if pkgs.stdenv.hostPlatform.isDarwin then
-      "\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\""
+      "\"${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\""
     else
-      "~/.1password/agent.sock";
+      "${config.home.homeDirectory}/.1password/agent.sock";
 in
 {
   programs.zsh = {
@@ -48,13 +48,18 @@ in
     interactiveShellInit = ''
       set -g fish_greeting
 
-      fish_vi_key_bindings 
+      fish_vi_key_bindings
+    ''
+    + lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
 
       if test -z "$SSH_AUTH_SOCK"
         set -gx SSH_1P_SOCK ${onePasswordPath}
       else
         set -gx SSH_1P_SOCK $SSH_AUTH_SOCK
       end
+    ''
+    + lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+      set -gx SSH_1P_SOCK ${onePasswordPath}
     '';
 
     plugins = [ ];
