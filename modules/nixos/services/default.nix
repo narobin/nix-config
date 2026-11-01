@@ -10,5 +10,6 @@
     ./sunshine.nix
     ./blocky.nix
     ./miniflux.nix
+    ./smart-home
   ];
 }
