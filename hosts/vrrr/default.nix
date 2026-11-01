@@ -59,6 +59,14 @@
     configureTailscale = true;
   };
 
+  services.smart-home = {
+    enable = true;
+    enableMQTT = true;
+    enableMetering = true;
+    waterMeterId = "1551542066";
+    energyMeterId = "43724105";
+  };
+
   networking.hostName = "vrrr";
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "26.05";
