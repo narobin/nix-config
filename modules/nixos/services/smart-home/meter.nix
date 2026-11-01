@@ -38,15 +38,15 @@
             state_class = "total_increasing";
             device_class = "water";
           }
-          {
-            id = cfg.energyMeterId;
-            protocol = "scm";
-            name = "Electric Meter";
-            device_class = "energy";
-            unit_of_measurement = "kWh";
-            state_class = "total_increasing";
-            icon = "mdi:transmission-tower";
-          }
+          # {
+          #   id = cfg.energyMeterId;
+          #   protocol = "scm";
+          #   name = "Electric Meter";
+          #   device_class = "energy";
+          #   unit_of_measurement = "kWh";
+          #   state_class = "total_increasing";
+          #   icon = "mdi:transmission-tower";
+          # }
         ];
       };
     in
