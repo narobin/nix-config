@@ -51,7 +51,10 @@
 
   services.blocky.enable = true;
 
-  services.sunshine.enable = true;
+  services.remote-desktop = {
+    enable = true;
+    user = "noah";
+  };
 
   services.miniflux = {
     enable = true;
