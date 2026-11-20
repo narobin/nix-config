@@ -15,8 +15,8 @@
       "zen"
       "onedrive"
       "moonlight"
-      "discord"
       "zotero"
+      "steam"
     ];
 
     masApps = {
@@ -28,6 +28,7 @@
       "Excel" = 462058435;
       "Word" = 462054704;
       "Amphetamine" = 937984704;
+      "Current" = 6758530974;
     };
 
     onActivation = {
