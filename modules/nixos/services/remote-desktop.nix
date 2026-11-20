@@ -53,8 +53,9 @@
           chmod 600 "$state_dir/tls_key.pem"
         fi
 
-        if [ ! -f "$state_dir/rsa_key.pem" ]; then
-          ${pkgs.openssl}/bin/openssl genrsa -out "$state_dir/rsa_key.pem" 2048
+        # -traditional forces PKCS#1 (BEGIN RSA PRIVATE KEY), required by wayvnc/nettle
+        if [ ! -f "$state_dir/rsa_key.pem" ] || grep -q "BEGIN PRIVATE KEY" "$state_dir/rsa_key.pem"; then
+          ${pkgs.openssl}/bin/openssl genrsa -traditional -out "$state_dir/rsa_key.pem" 2048
           chmod 600 "$state_dir/rsa_key.pem"
         fi
       '';
@@ -97,6 +98,12 @@
         environment = {
           WLR_BACKENDS = "headless";
           WLR_LIBINPUT_NO_DEVICES = "1";
+          # Pin directly to the render node so wlroots skips /dev/dri/card1
+          WLR_RENDER_DRM_DEVICE = "/dev/dri/renderD128";
+          # Bind wlroots GBM/EGL to the proprietary NVIDIA driver
+          GBM_BACKEND = "nvidia-drm";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+          WLR_NO_HARDWARE_CURSORS = "1";
         };
         serviceConfig = {
           Type = "simple";
