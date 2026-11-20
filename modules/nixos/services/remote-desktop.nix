@@ -16,48 +16,69 @@
   config =
     let
       cfg = config.services.remote-desktop;
-      wayvncConfig = pkgs.writeText "wayvnc-headless.conf" ''
-        address=0.0.0.0
-        port=5900
-        enable_auth=true
-        enable_pam=true
-        certificate_file=/home/${cfg.user}/.local/state/wayvnc/tls_cert.pem
-        private_key_file=/home/${cfg.user}/.local/state/wayvnc/tls_key.pem
-        rsa_private_key_file=/home/${cfg.user}/.local/state/wayvnc/rsa_key.pem
+      sunshinePrepCmd = pkgs.writeShellScript "sunshine-prep" ''
+        exec ${pkgs.wlr-randr}/bin/wlr-randr \
+          --output HEADLESS-1 \
+          --custom-mode "''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz" \
+          --scale 2
       '';
-      labwcConfigDir = pkgs.writeTextDir "menu.xml" ''
-        <?xml version="1.0" encoding="UTF-8"?>
-        <openbox_menu>
-          <menu id="root-menu" label="Headless CAD">
-            <item label="Terminal (Ghostty)">
-              <action name="Execute" command="ghostty --gtk-single-instance=false" />
-            </item>
-            <item label="Exit Remote Session">
-              <action name="Exit" />
-            </item>
-          </menu>
-        </openbox_menu>
+
+      sunshineConf = pkgs.writeText "sunshine-headless.conf" ''
+        capture = wlr
+        encoder = nvenc
+        adapter_name = /dev/dri/renderD128
+        origin_web_ui_allowed = pc
+        upnp = disabled
+        system_tray = disabled
+        global_prep_cmd = [{"do":"${sunshinePrepCmd}","undo":""}]
       '';
-      initKeys = pkgs.writeShellScript "wayvnc-init-keys" ''
-        set -euo pipefail
-        state_dir="$HOME/.local/state/wayvnc"
-        mkdir -p "$state_dir"
-        chmod 700 "$state_dir"
 
-        if [ ! -f "$state_dir/tls_key.pem" ] || [ ! -f "$state_dir/tls_cert.pem" ]; then
-          ${pkgs.openssl}/bin/openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-            -keyout "$state_dir/tls_key.pem" \
-            -out "$state_dir/tls_cert.pem" \
-            -subj "/CN=nixos-headless" \
-            -addext "subjectAltName=DNS:localhost,IP:127.0.0.1"
-          chmod 600 "$state_dir/tls_key.pem"
-        fi
+      # Creates /nix/store/<hash>-menu.xml/menu.xml and evaluates to the parent directory
+      labwcConfigDir = pkgs.linkFarm "labwc-headless-config" {
+        "rc.xml" = pkgs.writeText "rc.xml" ''
+          <?xml version="1.0" encoding="UTF-8"?>
+          <labwc_config>
+            <libinput>
+              <device category="default">
+                <sendEventsMode>no</sendEventsMode>
+              </device>
+              <device category="libvirtualhid Keyboard">
+                <sendEventsMode>yes</sendEventsMode>
+              </device>
+              <device category="libvirtualhid Mouse">
+                <sendEventsMode>yes</sendEventsMode>
+              </device>
+              <device category="libvirtualhid Mouse (Absolute)">
+                <sendEventsMode>yes</sendEventsMode>
+              </device>
+              <device category="libvirtualhid Touchscreen">
+                <sendEventsMode>yes</sendEventsMode>
+              </device>
+              <device category="libvirtualhid Pen Tablet">
+                <sendEventsMode>yes</sendEventsMode>
+              </device>
+            </libinput>
+          </labwc_config>
+        '';
+        "menu.xml" = pkgs.writeText "menu.xml" ''
+          <?xml version="1.0" encoding="UTF-8"?>
+          <openbox_menu>
+            <menu id="root-menu" label="Headless CAD">
+              <item label="Terminal (Ghostty)">
+                <action name="Execute" command="ghostty --gtk-single-instance=false" />
+              </item>
+              <item label="Exit Remote Session">
+                <action name="Exit" />
+              </item>
+            </menu>
+          </openbox_menu>
+        '';
+      };
 
-        # -traditional forces PKCS#1 (BEGIN RSA PRIVATE KEY), required by wayvnc/nettle
-        if [ ! -f "$state_dir/rsa_key.pem" ] || grep -q "BEGIN PRIVATE KEY" "$state_dir/rsa_key.pem"; then
-          ${pkgs.openssl}/bin/openssl genrsa -traditional -out "$state_dir/rsa_key.pem" 2048
-          chmod 600 "$state_dir/rsa_key.pem"
-        fi
+      labwcStartup = pkgs.writeShellScript "labwc-headless-startup" ''
+        ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 2 &
+        ${pkgs.swaybg}/bin/swaybg -c '#243b55' &
+        exec ${pkgs.sunshine}/bin/sunshine ${sunshineConf}
       '';
     in
     lib.mkIf cfg.enable {
@@ -74,56 +95,66 @@
 
       programs.labwc.enable = true;
 
-      security.pam.services.wayvnc = { };
-
       users.users.${cfg.user} = {
         linger = true;
         extraGroups = [
           "video"
           "render"
+          "uinput"
+          "input"
         ];
       };
 
-      networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 5900 ];
+      # services.udev.extraRules = ''
+      #   SUBSYSTEM=="input", ATTRS{id/vendor}=="1209", ATTRS{name}=="libvirtualhid*", TAG+="seat", ENV{ID_SEAT}="seat-headless"
+      # '';
 
-      systemd.user.services.remote-desktop = {
-        description = "Headless Wayland compositor";
+      networking.firewall.interfaces."tailscale0" = {
+        allowedTCPPortRanges = [
+          {
+            from = 47984;
+            to = 47990;
+          }
+        ];
+        allowedUDPPorts = [
+          47998
+          47999
+          48000
+          48002
+          48010
+        ];
+      };
+
+      systemd.user.services.headless-cad = {
+        description = "Headless Wayland Compositor (labwc + Sunshine)";
         path = with pkgs; [
           labwc
-          wayvnc
+          sunshine
+          wlr-randr
           "/run/current-system/sw"
           "/etc/profiles/per-user/${cfg.user}"
           "/run/wrappers"
         ];
-        environment = {
-          WLR_BACKENDS = "headless";
-          WLR_LIBINPUT_NO_DEVICES = "1";
-          WLR_RENDER_DRM_DEVICE = "/dev/dri/renderD128";
 
-          # Allow NVIDIA's proprietary blobs and Vulkan loader to dlopen /run/opengl-driver
+        environment = {
+          WLR_BACKENDS = "headless,libinput";
+          WLR_LIBINPUT_NO_DEVICES = "1";
+          WLR_RENDERER = "pixman";
+          LIBSEAT_BACKEND = "noop";
+          XDG_SEAT = "seat-headless";
+
+          # Expose NVIDIA /run/opengl-driver for NVENC encoding and 3D CAD OpenGL/Vulkan
           LD_LIBRARY_PATH = "/run/opengl-driver/lib";
           XDG_DATA_DIRS = "/run/opengl-driver/share:/run/current-system/sw/share:/etc/profiles/per-user/${cfg.user}/share";
-
-          GBM_BACKEND = "nvidia-drm";
-          GBM_BACKENDS_PATH = "/run/opengl-driver/lib/gbm";
           __EGL_VENDOR_LIBRARY_DIRS = "/run/opengl-driver/share/glvnd/egl_vendor.d";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-          WLR_NO_HARDWARE_CURSORS = "1";
         };
+
         serviceConfig = {
           Type = "simple";
-          # Prevent inheriting local Niri's WAYLAND_DISPLAY socket
-          UnsetEnvironment = [
-            "WAYLAND_DISPLAY"
-            "DISPLAY"
-          ];
-          ExecStartPre = "${initKeys}";
-          # -S ties labwc's lifetime to wayvnc; -C points both to /nix/store configs
-          ExecStart = ''
-            ${pkgs.labwc}/bin/labwc -C ${labwcConfigDir} \
-              -S "${pkgs.wayvnc}/bin/wayvnc -C ${wayvncConfig} -S %t/wayvncctl-headless"
-          '';
-          Restart = "no";
+          ExecStart = "${pkgs.labwc}/bin/labwc -C ${labwcConfigDir} -s ${labwcStartup}";
+          Restart = "on-failure";
+          RestartSec = 2;
         };
       };
     };
