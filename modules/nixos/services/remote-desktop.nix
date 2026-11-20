@@ -98,10 +98,15 @@
         environment = {
           WLR_BACKENDS = "headless";
           WLR_LIBINPUT_NO_DEVICES = "1";
-          # Pin directly to the render node so wlroots skips /dev/dri/card1
           WLR_RENDER_DRM_DEVICE = "/dev/dri/renderD128";
-          # Bind wlroots GBM/EGL to the proprietary NVIDIA driver
+
+          # Allow NVIDIA's proprietary blobs and Vulkan loader to dlopen /run/opengl-driver
+          LD_LIBRARY_PATH = "/run/opengl-driver/lib";
+          XDG_DATA_DIRS = "/run/opengl-driver/share:/run/current-system/sw/share:/etc/profiles/per-user/${cfg.user}/share";
+
           GBM_BACKEND = "nvidia-drm";
+          GBM_BACKENDS_PATH = "/run/opengl-driver/lib/gbm";
+          __EGL_VENDOR_LIBRARY_DIRS = "/run/opengl-driver/share/glvnd/egl_vendor.d";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
           WLR_NO_HARDWARE_CURSORS = "1";
         };
