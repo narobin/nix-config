@@ -8,5 +8,6 @@
     ./forge.nix
     ./vaultwarden.nix
     ./sunshine.nix
+    ./blocky.nix
   ];
 }
