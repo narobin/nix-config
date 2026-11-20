@@ -34,6 +34,9 @@
         KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
       '';
 
+      hardware.uinput.enable = true;
+      users.users.noah.extraGroups = [ "uinput" "video" "render" ];
+
       services.sunshine = {
         openFirewall = true;
         settings = {
@@ -48,7 +51,6 @@
           '';
         };
       };
-
 
       # networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
       #   allowedTCPPorts = [
