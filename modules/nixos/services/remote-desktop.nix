@@ -139,9 +139,8 @@
         environment = {
           WLR_BACKENDS = "headless,libinput";
           WLR_LIBINPUT_NO_DEVICES = "1";
-          WLR_RENDERER = "pixman";
+          WLR_RENDER_DRM_DEVICE = "/dev/dri/renderD128";
           LIBSEAT_BACKEND = "noop";
-          XDG_SEAT = "seat-headless";
 
           # Expose NVIDIA /run/opengl-driver for NVENC encoding and 3D CAD OpenGL/Vulkan
           LD_LIBRARY_PATH = "/run/opengl-driver/lib";
