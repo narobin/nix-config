@@ -26,7 +26,7 @@
         exec ${pkgs.wlr-randr}/bin/wlr-randr \
           --output HEADLESS-1 \
           --custom-mode "''${SUNSHINE_CLIENT_WIDTH}x''${SUNSHINE_CLIENT_HEIGHT}@''${SUNSHINE_CLIENT_FPS}Hz" \
-          --scale 2
+          --scale 1
       '';
 
       sunshineConf = pkgs.writeText "sunshine-headless.conf" ''
@@ -83,7 +83,7 @@
       };
 
       labwcStartup = pkgs.writeShellScript "labwc-headless-startup" ''
-        ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 2 &
+        ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 1 &
         ${pkgs.swaybg}/bin/swaybg -c '#243b55' &
         exec ${sunshinePkg}/bin/sunshine ${sunshineConf}
       '';
