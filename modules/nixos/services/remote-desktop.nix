@@ -96,6 +96,7 @@
       programs.labwc.enable = true;
 
       hardware.uinput.enable = true;
+      services.udev.packages = [ pkgs.sunshine ];
 
       users.users.${cfg.user} = {
         linger = true;
