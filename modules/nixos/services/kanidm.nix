@@ -82,7 +82,7 @@
         };
       };
 
-      services.kanidm.package = pkgs.kanidmWithSecretProvisioning_1_11;
+      services.kanidm.package = pkgs.kanidmWithSecretProvisioning_1_12;
 
       services.kanidm.server = {
         enable = true;
