@@ -33,6 +33,7 @@
         capture = wlr
         encoder = nvenc
         adapter_name = /dev/dri/renderD128
+        nvenc_preset = 1
         origin_web_ui_allowed = pc
         upnp = disabled
         system_tray = disabled
