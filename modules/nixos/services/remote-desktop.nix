@@ -65,7 +65,7 @@
           <openbox_menu>
             <menu id="root-menu" label="Headless CAD">
               <item label="Terminal (Ghostty)">
-                <action name="Execute" command="ghostty --gtk-single-instance=false" />
+                <action name="Execute" command="${pkgs.ghostty}/bin/ghostty --gtk-single-instance=false" />
               </item>
               <item label="Exit Remote Session">
                 <action name="Exit" />
@@ -76,6 +76,7 @@
       };
 
       labwcStartup = pkgs.writeShellScript "labwc-headless-startup" ''
+        unset WAYLAND_DISPLAY
         ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 2 &
         ${pkgs.swaybg}/bin/swaybg -c '#243b55' &
         exec ${pkgs.sunshine}/bin/sunshine ${sunshineConf}
@@ -106,10 +107,6 @@
           "input"
         ];
       };
-
-      # services.udev.extraRules = ''
-      #   SUBSYSTEM=="input", ATTRS{id/vendor}=="1209", ATTRS{name}=="libvirtualhid*", TAG+="seat", ENV{ID_SEAT}="seat-headless"
-      # '';
 
       networking.firewall.interfaces."tailscale0" = {
         allowedTCPPortRanges = [
