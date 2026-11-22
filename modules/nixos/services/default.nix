@@ -7,7 +7,7 @@
     ./immich.nix
     ./forge.nix
     ./vaultwarden.nix
-    ./sunshine.nix
+    ./remote-desktop.nix
     ./blocky.nix
     ./miniflux.nix
     ./smart-home

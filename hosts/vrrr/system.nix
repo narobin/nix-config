@@ -14,6 +14,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
+    nvidiaPersistenced = true;
     open = false;
     powerManagement.enable = true;
     nvidiaSettings = true;
