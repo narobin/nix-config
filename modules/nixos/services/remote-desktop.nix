@@ -95,6 +95,8 @@
 
       programs.labwc.enable = true;
 
+      hardware.uinput.enable = true;
+
       users.users.${cfg.user} = {
         linger = true;
         extraGroups = [
