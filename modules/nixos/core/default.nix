@@ -8,5 +8,6 @@
     ./sops.nix
     ./ssh.nix
     ./system.nix
+    ./nix.nix
   ];
 }
