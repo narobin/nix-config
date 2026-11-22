@@ -16,6 +16,12 @@
   config =
     let
       cfg = config.services.remote-desktop;
+
+      sunshinePkg = pkgs.sunshine.override {
+        cudaSupport = true;
+        cudaPackages = pkgs.cudaPackages_12;
+      };
+
       sunshinePrepCmd = pkgs.writeShellScript "sunshine-prep" ''
         exec ${pkgs.wlr-randr}/bin/wlr-randr \
           --output HEADLESS-1 \
@@ -78,7 +84,7 @@
       labwcStartup = pkgs.writeShellScript "labwc-headless-startup" ''
         ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 2 &
         ${pkgs.swaybg}/bin/swaybg -c '#243b55' &
-        exec ${pkgs.sunshine}/bin/sunshine ${sunshineConf}
+        exec ${sunshinePkg}/bin/sunshine ${sunshineConf}
       '';
     in
     lib.mkIf cfg.enable {
@@ -128,7 +134,7 @@
         description = "Headless Wayland Compositor (labwc + Sunshine)";
         path = with pkgs; [
           labwc
-          sunshine
+          sunshinePkg
           wlr-randr
           "/run/current-system/sw"
           "/etc/profiles/per-user/${cfg.user}"
