@@ -16,6 +16,7 @@
       automatic = true;
       dates = [ "02:15" ];
       randomizedDelaySec = "15min";
+      options = "--delete-older-than 14d";
     };
 
     settings = {
