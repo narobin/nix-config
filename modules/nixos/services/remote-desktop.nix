@@ -76,7 +76,6 @@
       };
 
       labwcStartup = pkgs.writeShellScript "labwc-headless-startup" ''
-        unset WAYLAND_DISPLAY
         ${pkgs.wlr-randr}/bin/wlr-randr --output HEADLESS-1 --custom-mode 2560x1600@60Hz --scale 2 &
         ${pkgs.swaybg}/bin/swaybg -c '#243b55' &
         exec ${pkgs.sunshine}/bin/sunshine ${sunshineConf}
