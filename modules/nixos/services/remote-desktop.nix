@@ -113,6 +113,14 @@
           "uinput"
           "input"
         ];
+        packages = with pkgs; [
+          openrocket
+          freecad
+          openfoam
+          calculix-ccx
+          paraview
+          gmsh
+        ];
       };
 
       networking.firewall.interfaces."tailscale0" = {
